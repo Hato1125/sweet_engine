@@ -1,5 +1,0 @@
-/Users/toha/Desktop/sweet_engine/build/CMakeFiles/edit_cache.dir
-/Users/toha/Desktop/sweet_engine/build/CMakeFiles/rebuild_cache.dir
-/Users/toha/Desktop/sweet_engine/build/src/test/CMakeFiles/sweet_test.dir
-/Users/toha/Desktop/sweet_engine/build/src/test/CMakeFiles/edit_cache.dir
-/Users/toha/Desktop/sweet_engine/build/src/test/CMakeFiles/rebuild_cache.dir
