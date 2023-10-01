@@ -1,5 +1,5 @@
 #include <application.h>
-#include <application_loop_config.h>
+#include <application_loop_info.h>
 
 static sweet::Application* app = nullptr;
 

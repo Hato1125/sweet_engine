@@ -21,9 +21,9 @@ namespace sweet {
         bool is_auto_finish;
 
         Application(
-            std::string title,
-            std::pair<uint32_t, uint32_t> pos,
-            std::pair<uint32_t, uint32_t> size,
+            const std::string& title,
+            const std::pair<uint32_t, uint32_t>& pos,
+            const std::pair<uint32_t, uint32_t>& size,
             uint32_t window_flags = SDL_WINDOW_SHOWN,
             uint32_t renderer_falgs = SDL_RENDERER_PRESENTVSYNC
                 | SDL_RENDERER_TARGETTEXTURE
@@ -32,6 +32,18 @@ namespace sweet {
         );
 
         void running(const ApplicationLoopInfo& info);
+
+        void set_window_title(const std::string& title);
+        void set_window_pos(const std::pair<uint32_t, uint32_t>& pos);
+        void set_window_size(const std::pair<uint32_t, uint32_t>& size);
+        void set_window_minimum_size(const std::pair<uint32_t, uint32_t>& size);
+        void set_window_maximum_size(const std::pair<uint32_t, uint32_t>& size);
+
+        std::string get_window_title() const;
+        std::pair<uint32_t, uint32_t> get_window_pos() const;
+        std::pair<uint32_t, uint32_t> get_window_size() const;
+        std::pair<uint32_t, uint32_t> get_window_minimum_size() const;
+        std::pair<uint32_t, uint32_t> get_window_maximum_size() const;
 
         [[nodiscard]] SDL_Window* get_window() const;
         [[nodiscard]] SDL_Renderer* get_renderer() const;

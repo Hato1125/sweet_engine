@@ -2,9 +2,9 @@
 
 namespace sweet {
     Application::Application(
-        std::string title,
-        std::pair<uint32_t, uint32_t> pos,
-        std::pair<uint32_t, uint32_t> size,
+        const std::string& title,
+        const std::pair<uint32_t, uint32_t>& pos,
+        const std::pair<uint32_t, uint32_t>& size,
         uint32_t window_flags,
         uint32_t renderer_flags,
         int32_t graphics_device_index
@@ -83,6 +83,66 @@ namespace sweet {
 
         if(info.on_finished != nullptr)
             info.on_finished(*this);
+    }
+
+    void Application::set_window_title(const std::string& title) {
+        SDL_SetWindowTitle(_window.get(), title.c_str());
+    }
+
+    void Application::set_window_pos(const std::pair<uint32_t, uint32_t>& pos) {
+        SDL_SetWindowPosition(_window.get(), std::get<0>(pos), std::get<1>(pos));
+    }
+
+    void Application::set_window_size(const std::pair<uint32_t, uint32_t>& size) {
+        SDL_SetWindowSize(_window.get(), std::get<0>(size), std::get<1>(size));
+    }
+
+    void Application::set_window_minimum_size(const std::pair<uint32_t, uint32_t>& size) {
+        SDL_SetWindowMinimumSize(_window.get(), std::get<0>(size), std::get<1>(size));
+    }
+
+    void Application::set_window_maximum_size(const std::pair<uint32_t, uint32_t>& size) {
+        SDL_SetWindowMaximumSize(_window.get(), std::get<0>(size), std::get<1>(size));
+    }
+
+    std::string Application::get_window_title() const {
+        return SDL_GetWindowTitle(_window.get());
+    }
+
+    std::pair<uint32_t, uint32_t> Application::get_window_pos() const {
+        int x = 0;
+        int y = 0;
+
+        SDL_GetWindowPosition(_window.get(), &x, &y);
+
+        return {x, y};
+    }
+
+    std::pair<uint32_t, uint32_t> Application::get_window_size() const {
+        int width = 0;
+        int height = 0;
+
+        SDL_GetWindowSize(_window.get(), &width, &height);
+
+        return {width, height};
+    }
+
+    std::pair<uint32_t, uint32_t> Application::get_window_minimum_size() const {
+        int width = 0;
+        int height = 0;
+
+        SDL_GetWindowMinimumSize(_window.get(), &width, &height);
+
+        return {width, height};
+    }
+
+    std::pair<uint32_t, uint32_t> Application::get_window_maximum_size() const {
+        int width = 0;
+        int height = 0;
+
+        SDL_GetWindowMaximumSize(_window.get(), &width, &height);
+
+        return {width, height};
     }
 
     SDL_Window* Application::get_window() const {
