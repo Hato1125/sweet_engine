@@ -5,6 +5,7 @@ add_executable(${SWEET_TEST_NAME} "main.cc")
 set(
     SWEET_TEST_INCLUDE
     ${SWEET_ENGINE_DIR}/core
+    ${SWEET_ENGINE_DIR}/unit
 )
 
 set(

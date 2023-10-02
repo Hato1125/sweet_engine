@@ -2,9 +2,9 @@
 
 namespace sweet {
     Application::Application(
-        const std::string& title,
-        const std::pair<uint32_t, uint32_t>& pos,
-        const std::pair<uint32_t, uint32_t>& size,
+        const std::string &title,
+        const Point<uint32_t> &pos,
+        const Size<uint32_t> &size,
         uint32_t window_flags,
         uint32_t renderer_flags,
         int32_t graphics_device_index
@@ -13,15 +13,15 @@ namespace sweet {
         is_running = false;
         is_auto_finish = true;
 
-        SDL_Window* wind = nullptr;
-        SDL_Renderer* rend = nullptr;
+        SDL_Window *wind = nullptr;
+        SDL_Renderer *rend = nullptr;
 
         wind = SDL_CreateWindow(
             title.c_str(),
-            std::get<0>(pos),
-            std::get<1>(pos),
-            std::get<0>(size),
-            std::get<1>(size),
+            pos.x,
+            pos.y,
+            size.width,
+            size.height,
             window_flags
         );
 
@@ -89,67 +89,79 @@ namespace sweet {
         SDL_SetWindowTitle(_window.get(), title.c_str());
     }
 
-    void Application::set_window_pos(const std::pair<uint32_t, uint32_t>& pos) {
-        SDL_SetWindowPosition(_window.get(), std::get<0>(pos), std::get<1>(pos));
+    void Application::set_window_pos(const Point<uint32_t> &pos) {
+        SDL_SetWindowPosition(_window.get(), pos.x, pos.y);
     }
 
-    void Application::set_window_size(const std::pair<uint32_t, uint32_t>& size) {
-        SDL_SetWindowSize(_window.get(), std::get<0>(size), std::get<1>(size));
+    void Application::set_window_size(const Size<uint32_t> &size) {
+        SDL_SetWindowSize(_window.get(), size.width, size.height);
     }
 
-    void Application::set_window_minimum_size(const std::pair<uint32_t, uint32_t>& size) {
-        SDL_SetWindowMinimumSize(_window.get(), std::get<0>(size), std::get<1>(size));
+    void Application::set_window_minimum_size(const Size<uint32_t> &size) {
+        SDL_SetWindowMinimumSize(_window.get(), size.width, size.height);
     }
 
-    void Application::set_window_maximum_size(const std::pair<uint32_t, uint32_t>& size) {
-        SDL_SetWindowMaximumSize(_window.get(), std::get<0>(size), std::get<1>(size));
+    void Application::set_window_maximum_size(const Size<uint32_t> &size) {
+        SDL_SetWindowMaximumSize(_window.get(), size.width, size.height);
     }
 
     std::string Application::get_window_title() const {
         return SDL_GetWindowTitle(_window.get());
     }
 
-    std::pair<uint32_t, uint32_t> Application::get_window_pos() const {
+    Point<uint32_t> Application::get_window_pos() const {
         int x = 0;
         int y = 0;
 
         SDL_GetWindowPosition(_window.get(), &x, &y);
 
-        return {x, y};
+        return {
+            static_cast<uint32_t>(x),
+            static_cast<uint32_t>(y)
+        };
     }
 
-    std::pair<uint32_t, uint32_t> Application::get_window_size() const {
+    Size<uint32_t> Application::get_window_size() const {
         int width = 0;
         int height = 0;
 
         SDL_GetWindowSize(_window.get(), &width, &height);
 
-        return {width, height};
+        return {
+            static_cast<uint32_t>(width),
+            static_cast<uint32_t>(height)
+        };
     }
 
-    std::pair<uint32_t, uint32_t> Application::get_window_minimum_size() const {
+    Size<uint32_t> Application::get_window_minimum_size() const {
         int width = 0;
         int height = 0;
 
         SDL_GetWindowMinimumSize(_window.get(), &width, &height);
 
-        return {width, height};
+        return {
+            static_cast<uint32_t>(width),
+            static_cast<uint32_t>(height)
+        };
     }
 
-    std::pair<uint32_t, uint32_t> Application::get_window_maximum_size() const {
+    Size<uint32_t> Application::get_window_maximum_size() const {
         int width = 0;
         int height = 0;
 
         SDL_GetWindowMaximumSize(_window.get(), &width, &height);
 
-        return {width, height};
+        return {
+            static_cast<uint32_t>(width),
+            static_cast<uint32_t>(height)
+        };
     }
 
-    SDL_Window* Application::get_window() const {
+    SDL_Window *Application::get_window() const {
         return _window.get();
     }
 
-    SDL_Renderer* Application::get_renderer() const {
+    SDL_Renderer *Application::get_renderer() const {
         return _renderer.get();
     }
 }

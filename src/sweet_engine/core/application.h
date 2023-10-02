@@ -4,10 +4,11 @@
 #include <memory>
 #include <string>
 #include <cstdint>
-#include <utility>
 
 #include <SDL.h>
 
+#include "../unit/size.h"
+#include "../unit/point.h"
 #include "application_loop_info.h"
 
 namespace sweet {
@@ -21,9 +22,9 @@ namespace sweet {
         bool is_auto_finish;
 
         Application(
-            const std::string& title,
-            const std::pair<uint32_t, uint32_t>& pos,
-            const std::pair<uint32_t, uint32_t>& size,
+            const std::string &title,
+            const Point<uint32_t> &point,
+            const Size<uint32_t> &size,
             uint32_t window_flags = SDL_WINDOW_SHOWN,
             uint32_t renderer_falgs = SDL_RENDERER_PRESENTVSYNC
                 | SDL_RENDERER_TARGETTEXTURE
@@ -31,22 +32,22 @@ namespace sweet {
             int32_t graphics_diriver_index = -1
         );
 
-        void running(const ApplicationLoopInfo& info);
+        void running(const ApplicationLoopInfo &info);
 
-        void set_window_title(const std::string& title);
-        void set_window_pos(const std::pair<uint32_t, uint32_t>& pos);
-        void set_window_size(const std::pair<uint32_t, uint32_t>& size);
-        void set_window_minimum_size(const std::pair<uint32_t, uint32_t>& size);
-        void set_window_maximum_size(const std::pair<uint32_t, uint32_t>& size);
+        void set_window_title(const std::string &title);
+        void set_window_pos(const Point<uint32_t> &pos);
+        void set_window_size(const Size<uint32_t> &size);
+        void set_window_minimum_size(const Size<uint32_t> &size);
+        void set_window_maximum_size(const Size<uint32_t> &size);
 
         std::string get_window_title() const;
-        std::pair<uint32_t, uint32_t> get_window_pos() const;
-        std::pair<uint32_t, uint32_t> get_window_size() const;
-        std::pair<uint32_t, uint32_t> get_window_minimum_size() const;
-        std::pair<uint32_t, uint32_t> get_window_maximum_size() const;
+        Point<uint32_t> get_window_pos() const;
+        Size<uint32_t> get_window_size() const;
+        Size<uint32_t> get_window_minimum_size() const;
+        Size<uint32_t> get_window_maximum_size() const;
 
-        [[nodiscard]] SDL_Window* get_window() const;
-        [[nodiscard]] SDL_Renderer* get_renderer() const;
+        [[nodiscard]] SDL_Window *get_window() const;
+        [[nodiscard]] SDL_Renderer *get_renderer() const;
     };
 }
 
