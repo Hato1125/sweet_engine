@@ -1,5 +1,5 @@
 target_sources(
-    engine
+    ${SWEET_ENGINE_NAME}
     PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/application.cc
 )
