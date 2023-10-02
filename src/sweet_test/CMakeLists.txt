@@ -6,6 +6,7 @@ set(
     SWEET_TEST_INCLUDE
     ${SWEET_ENGINE_DIR}/core
     ${SWEET_ENGINE_DIR}/unit
+    ${SWEET_ENGINE_DIR}/graphics
 )
 
 set(

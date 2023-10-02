@@ -10,6 +10,7 @@ set(SWEET_ENGINE_DIR ${PROJECT_SOURCE_DIR}/src/sweet_engine)
 set(SWEET_TEST_DIR ${PROJECT_SOURCE_DIR}/src/sweet_test)
 
 find_package(sdl2 REQUIRED)
+find_package(sdl2_image REQUIRED)
 
 add_subdirectory(src/sweet_engine)
 add_subdirectory(src/sweet_test)

@@ -6,6 +6,7 @@
 #include <cstdint>
 
 #include <SDL.h>
+#include <SDL_image.h>
 
 #include "../unit/size.h"
 #include "../unit/point.h"

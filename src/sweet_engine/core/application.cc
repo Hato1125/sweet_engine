@@ -46,6 +46,7 @@ namespace sweet {
             info.on_initing(*this);
 
         if(SDL_Init(SDL_INIT_EVERYTHING) < 0
+            || IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG) < 0
             || _window.get() == nullptr
             || _renderer.get() == nullptr)
             return;
@@ -80,6 +81,7 @@ namespace sweet {
             info.on_finishing(*this);
 
         SDL_Quit();
+        IMG_Quit();
 
         if(info.on_finished != nullptr)
             info.on_finished(*this);
