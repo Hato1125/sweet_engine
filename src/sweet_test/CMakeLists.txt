@@ -7,6 +7,7 @@ set(
     ${SWEET_ENGINE_DIR}/core
     ${SWEET_ENGINE_DIR}/unit
     ${SWEET_ENGINE_DIR}/graphics
+    ${SWEET_ENGINE_DIR}/input
 )
 
 set(

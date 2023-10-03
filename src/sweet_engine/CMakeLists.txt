@@ -5,6 +5,7 @@ add_library(${SWEET_ENGINE_NAME})
 add_subdirectory(core)
 add_subdirectory(unit)
 add_subdirectory(graphics)
+add_subdirectory(input)
 
 target_link_libraries(
     ${SWEET_ENGINE_NAME}

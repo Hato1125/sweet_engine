@@ -1,4 +1,5 @@
 #include <sprite.h>
+#include <keyboard.h>
 #include <application.h>
 #include <application_loop_info.h>
 
@@ -14,13 +15,21 @@ void inited(sweet::Application& app) {
 }
 
 void loop(sweet::Application& app) {
-    sprt->render(1280 / 2, 720 / 2);
+    sweet::Keyboard::update();
+
+    if(sweet::Keyboard::is_separate(SDL_SCANCODE_A))
+        sprt->render(1280 / 2, 720 / 2);
+}
+
+void event(sweet::Application& app, SDL_Event& e) {
+    sweet::Keyboard::update_event(e);
 }
 
 int main(int args, char** argc) {
     sweet::ApplicationLoopInfo info {
         .on_inited = inited,
         .on_loop = loop,
+        .on_event = event,
     };
 
     app = new sweet::Application(
