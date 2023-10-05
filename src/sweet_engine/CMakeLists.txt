@@ -6,6 +6,7 @@ add_subdirectory(core)
 add_subdirectory(unit)
 add_subdirectory(graphics)
 add_subdirectory(input)
+add_subdirectory(scene)
 
 target_link_libraries(
     ${SWEET_ENGINE_NAME}
