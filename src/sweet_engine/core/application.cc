@@ -59,8 +59,12 @@ namespace sweet {
 
         while(is_running) {
             while(SDL_PollEvent(&event)) {
-                if(event.type == SDL_QUIT && is_auto_finish)
+                if(event.type == SDL_QUIT && is_auto_finish) {
+                    is_running = false;
+
+                    // is_runningをfalseにするだけでは無駄に1フレーム更新、レンダリングするからgotoを使う
                     goto LOOP_FINISH;
+                }
 
                 if(info.on_event != nullptr)
                     info.on_event(*this, event);
