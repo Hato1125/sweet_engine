@@ -1,6 +1,6 @@
 set(SWEET_ENGINE_NAME sweet_engine)
 
-add_library(${SWEET_ENGINE_NAME})
+add_library(${SWEET_ENGINE_NAME} SHARED)
 
 add_subdirectory(core)
 add_subdirectory(unit)
