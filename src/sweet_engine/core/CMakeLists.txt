@@ -1,5 +1,4 @@
-target_sources(
-    ${SWEET_ENGINE_NAME}
-    PUBLIC
-    ${CMAKE_CURRENT_SOURCE_DIR}/application.cc
-)
+add_library(sweet_core SHARED "application.cc")
+
+target_include_directories(sweet_core PUBLIC ${SWEET_ENGINE_DIR}/unit)
+target_link_libraries(sweet_core PUBLIC sweet_unit SDL2::SDL2 SDL2_image::SDL2_image)

@@ -8,10 +8,9 @@
 #include <SDL.h>
 #include <SDL_image.h>
 
-#include "../unit/size.h"
-#include "../unit/point.h"
-#include "../unit/rectangle.h"
-#include "../core/application.h"
+#include <size.h>
+#include <point.h>
+#include <rectangle.h>
 
 namespace sweet {
     enum class HorizontalPoint {

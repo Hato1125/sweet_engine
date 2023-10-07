@@ -8,8 +8,9 @@
 #include <SDL.h>
 #include <SDL_image.h>
 
-#include "../unit/size.h"
-#include "../unit/point.h"
+#include <size.h>
+#include <point.h>
+
 #include "application_loop_info.h"
 
 namespace sweet {

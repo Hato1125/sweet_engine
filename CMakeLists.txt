@@ -18,6 +18,17 @@ if(${CMAKE_BUILD_TYPE} STREQUAL "Release")
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${OUTPUT_DIR}/lib)
     set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${OUTPUT_DIR}/lib)
 
+    add_subdirectory(src/sweet_engine)
+
+    set(
+        TARGET_LIBS
+        sweet_core
+        sweet_graphics
+        sweet_input
+        sweet_scene
+        sweet_unit
+    )
+
     file(
         GLOB SWEET_ENGINE_HEADER_FILES
         "${SWEET_ENGINE_DIR}/core/**.h"
@@ -30,7 +41,7 @@ if(${CMAKE_BUILD_TYPE} STREQUAL "Release")
     foreach(HEADER ${SWEET_ENGINE_HEADER_FILES})
         configure_file(${HEADER} ${OUTPUT_DIR}/inc)
     endforeach()
+elseif()
+    add_subdirectory(src/sweet_engine)
+    add_subdirectory(src/sweet_test)
 endif()
-
-add_subdirectory(src/sweet_engine)
-add_subdirectory(src/sweet_test)
