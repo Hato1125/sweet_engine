@@ -59,6 +59,9 @@ namespace sweet {
         is_running = true;
 
         while(is_running) {
+            if(info.on_update != nullptr)
+                info.on_update(*this);
+
             while(SDL_PollEvent(&event)) {
                 if(event.type == SDL_QUIT && is_auto_finish) {
                     is_running = false;
@@ -72,11 +75,10 @@ namespace sweet {
                     info.on_event(*this, event);
             }
 
-            SDL_SetRenderDrawColor(_renderer.get(), 255, 0, 255, 255);
             SDL_RenderClear(_renderer.get());
 
-            if(info.on_loop != nullptr)
-                info.on_loop(*this);
+            if(info.on_render != nullptr)
+                info.on_render(*this);
 
             SDL_RenderPresent(_renderer.get());
         }

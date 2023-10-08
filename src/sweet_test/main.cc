@@ -18,9 +18,14 @@ void inited(sweet::Application& app) {
     sprt->renderer_v_pos = sweet::VerticalPoint::center;
 }
 
-void loop(sweet::Application& app) {
+void update(sweet::Application& app) {
+    game_loop.update();
+
+    std::cout << game_loop.get_framerate() << '\n';
+}
+
+void render(sweet::Application& app) {
     sweet::Keyboard::update();
-    std::cout << game_loop.get_framerate() << std::endl;
 
     if(sweet::Keyboard::is_separate(SDL_SCANCODE_A))
         sprt->render(1280 / 2, 720 / 2);
@@ -33,7 +38,8 @@ void event(sweet::Application& app, SDL_Event& e) {
 int main(int args, char** argc) {
     sweet::ApplicationLoopInfo info {
         .on_inited = inited,
-        .on_loop = loop,
+        .on_update = update,
+        .on_render = render,
         .on_event = event,
     };
 

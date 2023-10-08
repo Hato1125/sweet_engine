@@ -8,7 +8,8 @@ namespace sweet {
     struct ApplicationLoopInfo {
         void (*on_initing)(Application&) {nullptr};
         void (*on_inited)(Application&) {nullptr};
-        void (*on_loop)(Application&) {nullptr};
+        void (*on_update)(Application&) {nullptr};
+        void (*on_render)(Application&) {nullptr};
         void (*on_finishing)(Application&) {nullptr};
         void (*on_finished)(Application&) {nullptr};
         void (*on_event)(Application&, SDL_Event&) {nullptr};
