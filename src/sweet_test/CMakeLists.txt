@@ -12,7 +12,11 @@ set(
 
 set(
     SWEET_TEST_LIBRARY
-    sweet_engine
+    sweet_core
+    sweet_graphics
+    sweet_input
+    sweet_scene
+    sweet_unit
     SDL2::SDL2
 )
 

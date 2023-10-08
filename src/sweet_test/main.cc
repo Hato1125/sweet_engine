@@ -1,10 +1,14 @@
 #include <sprite.h>
 #include <keyboard.h>
+#include <game_loop.h>
 #include <application.h>
 #include <application_loop_info.h>
 
+#include <iostream>
+
 static sweet::Sprite *sprt = nullptr;
 static sweet::Application *app = nullptr;
+static sweet::GameLoop game_loop = {};
 
 void inited(sweet::Application& app) {
     sprt = new sweet::Sprite(app.get_renderer(), "/Users/toha/Desktop/macOS-Graphic.jpeg");
@@ -16,6 +20,7 @@ void inited(sweet::Application& app) {
 
 void loop(sweet::Application& app) {
     sweet::Keyboard::update();
+    std::cout << game_loop.get_framerate() << std::endl;
 
     if(sweet::Keyboard::is_separate(SDL_SCANCODE_A))
         sprt->render(1280 / 2, 720 / 2);
@@ -38,6 +43,7 @@ int main(int args, char** argc) {
         {1280, 720}
     );
 
+    game_loop.set_max_framerate(60.0f);
     app->running(info);
 
     delete sprt;

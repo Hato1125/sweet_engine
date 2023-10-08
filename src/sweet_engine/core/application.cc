@@ -25,20 +25,21 @@ namespace sweet {
             window_flags
         );
 
-        if(wind != nullptr) {
-            rend = SDL_CreateRenderer(
-                wind,
-                graphics_device_index,
-                renderer_flags
-            );
+        if(wind != nullptr)
+            _window.reset(wind);
+        else
+            return;
 
-            if(rend == nullptr) {
-                SDL_DestroyWindow(wind);
-            } else {
-                _window.reset(wind);
-                _renderer.reset(rend);
-            }
-        }
+        rend = SDL_CreateRenderer(
+            wind,
+            graphics_device_index,
+            renderer_flags
+        );
+
+        if(rend != nullptr)
+            _renderer.reset(rend);
+        else
+            _window.reset();
     }
 
     void Application::running(const ApplicationLoopInfo& info) {
@@ -62,7 +63,8 @@ namespace sweet {
                 if(event.type == SDL_QUIT && is_auto_finish) {
                     is_running = false;
 
-                    // is_runningをfalseにするだけでは無駄に1フレーム更新、レンダリングするからgotoを使う
+                    // is_runningをfalseにすると一フレーム無駄に
+                    // 更新するのでgotoを使ってループを抜ける
                     goto LOOP_FINISH;
                 }
 
