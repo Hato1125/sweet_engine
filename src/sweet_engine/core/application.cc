@@ -48,6 +48,7 @@ namespace sweet {
 
         if(SDL_Init(SDL_INIT_EVERYTHING) < 0
             || IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG) < 0
+            || TTF_Init() < 0
             || _window.get() == nullptr
             || _renderer.get() == nullptr)
             return;
@@ -66,7 +67,7 @@ namespace sweet {
                 if(event.type == SDL_QUIT && is_auto_finish) {
                     is_running = false;
 
-                    // is_runningをfalseにすると一フレーム無駄に
+                    // is_runningをfalseにするだけだと一フレーム無駄に
                     // 更新するのでgotoを使ってループを抜ける
                     goto LOOP_FINISH;
                 }
@@ -90,6 +91,7 @@ namespace sweet {
 
         SDL_Quit();
         IMG_Quit();
+        TTF_Quit();
 
         if(info.on_finished != nullptr)
             info.on_finished(*this);

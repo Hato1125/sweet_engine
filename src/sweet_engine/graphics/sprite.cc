@@ -16,30 +16,34 @@ namespace sweet {
         rotation_h_pos = HorizontalPoint::left;
         rotation_v_pos = VerticalPoint::top;
 
-        blend_mode = SDL_BLENDMODE_NONE;
+        blend_mode = SDL_BLENDMODE_BLEND;
         renderer_flip = SDL_FLIP_NONE;
     }
 
-    Sprite::Sprite(SDL_Renderer *renderer, const std::string &path) : Sprite() {
+    Sprite::Sprite(SDL_Renderer *renderer, SDL_Texture *texture) : Sprite() {
         _renderer = renderer;
 
-        if(_renderer != nullptr) {
-            SDL_Texture *texture = IMG_LoadTexture(_renderer, path.c_str());
+        if(_renderer != nullptr && texture != nullptr) {
+            _texture.reset(texture);
 
-            if(texture != nullptr) {
-                _texture.reset(texture);
+            SDL_QueryTexture(
+                _texture.get(),
+                &_format,
+                nullptr,
+                reinterpret_cast<int*>(&_width),
+                reinterpret_cast<int*>(&_height)
+            );
 
-                SDL_QueryTexture(
-                    _texture.get(),
-                    &_format,
-                    nullptr,
-                    reinterpret_cast<int*>(&_width),
-                    reinterpret_cast<int*>(&_height)
-                );
-
-                _byte = SDL_BYTESPERPIXEL(_format) * _width * _height;
-            }
+            _byte = SDL_BYTESPERPIXEL(_format) * _width * _height;
         }
+    }
+
+    Sprite::Sprite(SDL_Renderer *renderer, SDL_Surface *surface)
+        : Sprite(renderer, SDL_CreateTextureFromSurface(renderer, surface)) {
+    }
+
+    Sprite::Sprite(SDL_Renderer *renderer, const std::string &path)
+        : Sprite(renderer, IMG_LoadTexture(renderer, path.c_str())) {
     }
 
     float Sprite::calclate_horizontal_point(float width, HorizontalPoint pos) const {

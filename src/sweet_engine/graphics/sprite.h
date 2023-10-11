@@ -52,6 +52,8 @@ namespace sweet {
             SDL_RendererFlip renderer_flip;
 
             Sprite();
+            Sprite(SDL_Renderer *renderer, SDL_Texture *texture);
+            Sprite(SDL_Renderer *renderer, SDL_Surface *surface);
             Sprite(SDL_Renderer *renderer, const std::string &path);
 
             void render(

@@ -11,6 +11,7 @@ set(SWEET_TEST_DIR ${PROJECT_SOURCE_DIR}/src/sweet_test)
 
 find_package(sdl2 REQUIRED)
 find_package(sdl2_image REQUIRED)
+find_package(sdl2_ttf REQUIRED)
 
 # Release build.
 if(${CMAKE_BUILD_TYPE} STREQUAL "Release")
