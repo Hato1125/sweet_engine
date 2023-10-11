@@ -49,6 +49,7 @@ namespace sweet {
             VerticalPoint rotation_v_pos;
 
             SDL_BlendMode blend_mode;
+            SDL_ScaleMode scale_mode;
             SDL_RendererFlip renderer_flip;
 
             Sprite();
