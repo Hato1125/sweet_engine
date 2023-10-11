@@ -1,4 +1,4 @@
-#include <font.h>
+#include <font_render.h>
 #include <sprite.h>
 #include <keyboard.h>
 #include <game_loop.h>
@@ -8,7 +8,7 @@
 #include <iostream>
 
 static sweet::Sprite *sprt = nullptr;
-static sweet::Font *font = nullptr;
+static sweet::FontRender *font = nullptr;
 static sweet::Application *app = nullptr;
 static sweet::GameLoop game_loop = {};
 
@@ -21,21 +21,19 @@ void inited(sweet::Application& app) {
 
     sweet::FontInfo info {};
     info.color = sweet::Color(255, 255, 255);
-    info.point = 70;
-    font = new sweet::Font(app.get_renderer(), info, "/Users/toha/Desktop/Roboto-MediumItalic.ttf", "1. test");
+    info.point = 60;
+    font = new sweet::FontRender(app.get_renderer(), info, "/Users/toha/Desktop/Roboto-MediumItalic.ttf", "Hello World\nKaigyouTest1\nKaigyouTest2");
+    font->alignment = sweet::FontAlignment::center;
 }
 
 void update(sweet::Application& app) {
     game_loop.update();
     sweet::Keyboard::update();
-    
-    if(sweet::Keyboard::is_pushed(SDL_SCANCODE_A))
-        font->set_text("2. tesutooooooo!!!!!1");
 }
 
 void render(sweet::Application& app) {
-    sprt->render(1280 / 2, 720 / 2);
-    font->get_sprite()->render(100, 100);
+    //sprt->render(1280 / 2, 720 / 2);
+    font->render(480, 180);
 }
 
 void event(sweet::Application& app, SDL_Event& e) {

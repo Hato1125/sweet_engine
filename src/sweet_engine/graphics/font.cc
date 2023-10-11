@@ -22,6 +22,7 @@ namespace sweet {
         if(font == nullptr)
             return nullptr;
 
+        TTF_SetFontKerning(font, _info.text_space);
         TTF_SetFontStyle(font, static_cast<int>(_info.style));
         TTF_SetFontHinting(font, static_cast<int>(_info.hinting));
 
