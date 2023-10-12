@@ -10,6 +10,7 @@
 
 #include <size.h>
 #include <point.h>
+#include <color.h>
 #include <rectangle.h>
 
 namespace sweet {
@@ -39,6 +40,7 @@ namespace sweet {
             uint32_t _format;
 
         public:
+            uint8_t alpha;
             float horizontal_scale;
             float vertical_scale;
             double rotation_angle;
@@ -48,6 +50,7 @@ namespace sweet {
             HorizontalPoint rotation_h_pos;
             VerticalPoint rotation_v_pos;
 
+            Color blend_color;
             SDL_BlendMode blend_mode;
             SDL_ScaleMode scale_mode;
             SDL_RendererFlip renderer_flip;

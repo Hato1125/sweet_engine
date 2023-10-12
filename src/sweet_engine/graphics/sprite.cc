@@ -7,6 +7,7 @@ namespace sweet {
         _width = 0;
         _height = 0;
 
+        alpha = UINT8_MAX;
         horizontal_scale = 1.0f;
         vertical_scale = 1.0f;
         rotation_angle = 0.0f;
@@ -16,6 +17,7 @@ namespace sweet {
         rotation_h_pos = HorizontalPoint::left;
         rotation_v_pos = VerticalPoint::top;
 
+        blend_color = {255, 255, 255};
         blend_mode = SDL_BLENDMODE_BLEND;
         scale_mode = SDL_ScaleMode::SDL_ScaleModeNearest;
         renderer_flip = SDL_FLIP_NONE;
@@ -100,6 +102,8 @@ namespace sweet {
 
         SDL_SetTextureBlendMode(_texture.get(), blend_mode);
         SDL_SetTextureScaleMode(_texture.get(), scale_mode);
+        SDL_SetTextureAlphaMod(_texture.get(), alpha);
+        SDL_SetTextureColorMod(_texture.get(), blend_color.r, blend_color.g, blend_color.b);
         SDL_RenderCopyExF(
             _renderer,
             _texture.get(),
