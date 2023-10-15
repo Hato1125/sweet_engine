@@ -7,6 +7,8 @@
 
 #include <iostream>
 
+#undef main
+
 static sweet::Sprite *sprt = nullptr;
 static sweet::FontRender *font = nullptr;
 static sweet::Application *app = nullptr;
@@ -59,4 +61,6 @@ int main(int args, char** argc) {
 
     delete sprt;
     delete app;
+
+    return 0;
 }

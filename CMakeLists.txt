@@ -6,15 +6,24 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+if(WINDOWS)
+    set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS 1)
+endif()
+
 set(SWEET_ENGINE_DIR ${PROJECT_SOURCE_DIR}/src/sweet_engine)
 set(SWEET_TEST_DIR ${PROJECT_SOURCE_DIR}/src/sweet_test)
+
+if(WINDOWS)
+    # TODO いつか消す()
+    set(CMAKE_PREFIX_PATH "E:\\sdks")
+endif()
 
 find_package(sdl2 REQUIRED)
 find_package(sdl2_image REQUIRED)
 find_package(sdl2_ttf REQUIRED)
 
 # Release build.
-if(${CMAKE_BUILD_TYPE} STREQUAL "Release")
+if(CMAKE_BUILD_TYPE STREQUAL "Release")
     set(OUTPUT_DIR ${PROJECT_SOURCE_DIR}/build/release)
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${OUTPUT_DIR}/lib)
     set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${OUTPUT_DIR}/lib)
