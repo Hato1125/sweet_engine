@@ -3,7 +3,7 @@
 [READMEに戻る](../../README.md "READMEに戻る")
 
 ゲームループクラスは、デルタタイムの計算、FPSの計算、FPSの制限をするクラスです。
-使い方はとっても簡単で、
+使い方はとっても簡単で、update関数内で更新するだけでそれらの機能を使うことができます。
 ```cpp
 #include <iostream>
 
@@ -14,7 +14,7 @@
 
 sweet::GameLoop game_loop = {};
 
-void update(sweet::Applicatiion &app) {
+void update(sweet::Application &app) {
     game_loop.update();
 
     // デルタタイムの取得
@@ -24,22 +24,25 @@ void update(sweet::Applicatiion &app) {
     std::cout << "framerate:" << static_cast<int>(game_loop.get_framerate()) << '\n';
 }
 
-int main() {
+int main(int, char**) {
     sweet::Application app {
         "sweet-engine window",
         {SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED},
         {1280, 720}
     };
 
-    sweet::ApplicationLoopInfo info {};
+    sweet::ApplicationLoopInfo info {
+        .on_update = update
+    };
 
-    // 上限60FPSに設定
+    // 最大フレームレートを60FPSに設定
     game_loop.set_max_framerate(60.0f);
 
     app.running(info);
+
+    return 0;
 }
 ```
 ![img](../../asset/delta&framerate.png)
 
-update内で呼ぶだけでできます。  
-もしフレームレートの上限を設定したくない場合は-1を入れることで無制限になります。
+もしフレームレートを無制限にしたい場合は、最大フレームレートを-1にすることで実現できます。

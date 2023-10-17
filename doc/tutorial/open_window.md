@@ -2,13 +2,13 @@
 
 [READMEに戻る](../../README.md "READMEに戻る")
 
-Windowの表示はSDL2でのWindow表示より簡単です。
+Windowの表示はSDLより簡単で、Applicationを初期化しrunningメソッドを呼び出すだけでWindowが表示されます。
 ```cpp
 #include <SDL.h>
 #include <application.h>
 #include <application_loop_info.h>
 
-int main() {
+int main(int, char**) {
     sweet::Application app {
         "sweet-engine window",
         {SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED},
@@ -18,12 +18,13 @@ int main() {
     sweet::ApplicationLoopInfo info {};
 
     app.running(info);
+
+    return 0;
 }
 ```
 
 ![img](../../asset/window.png)
 
-このようにしてWindowを表示します。
 また、WindowFlags、RenderFlags、GraphicsDriverIndexを指定したい場合は、Applicationクラスの第3引数以降に記述します。
 
 ```cpp
@@ -75,7 +76,7 @@ void finished(sweet::Application &app) {
     // 終了処理後に呼ばれる
 }
 
-int main() {
+int main(int, char**) {
     sweet::Application app {
         "sweet-engine window",
         {SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED},
@@ -93,5 +94,16 @@ int main() {
     };
 
     app.running(info);
+
+    return 0;
 }
 ```
+それぞれの関数の実行順序は以下の通りになっています。
+
+1. on_initing (一回のみ)
+2. on_inited (一回のみ)
+3. on_update
+4. on_event
+5. on_render
+6. on_finishing (一回のみ)
+7. on_finished (一回のみ)
