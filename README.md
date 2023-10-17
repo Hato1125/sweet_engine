@@ -4,17 +4,28 @@
 <img src="./asset/icon.svg" width="100px">
 
 # SweetEngine
-
-シンプルなC++2Dゲームエンジン。
+シンプルなC++2Dゲームエンジン。  
+<span style="color: red; ">※開発中です。</span>
 
 </div>
 
+## 特徴
+* 簡単にゲームを構築できる
+* めんどくさいSDLでの処理を簡単に記述できる
+* ModernC++で記述できる
+
+## Feature
+* コントローラーのサポート
+* マウスのサポート
+* タッチのサポート
+* アトラステクスチャのサポート
+
 ## 技術
-- C++ 23
-- CMake
-- SDL2
-- SDL2_image
-- SDL2_ttf
+* C++ 23
+* CMake
+* SDL2
+* SDL2_image
+* SDL2_ttf
 
 ## 目次
 - [チュートリアル](./doc/tutorial "チュートリアル")
