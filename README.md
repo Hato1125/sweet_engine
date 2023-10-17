@@ -5,7 +5,7 @@
 
 # SweetEngine
 シンプルなC++2Dゲームエンジン。  
-<span style="color: red; ">※開発中です。</span>
+※開発中です。
 
 </div>
 
@@ -14,7 +14,7 @@
 * めんどくさいSDLでの処理を簡単に記述できる
 * ModernC++で記述できる
 
-## Feature
+## Features
 * コントローラーのサポート
 * マウスのサポート
 * タッチのサポート
