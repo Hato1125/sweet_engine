@@ -20,6 +20,9 @@ int main() {
     app.running(info);
 }
 ```
+
+![img](../../asset/window.png)
+
 このようにしてWindowを表示します。
 また、WindowFlags、RenderFlags、GraphicsDriverIndexを指定したい場合は、Applicationクラスの第3引数以降に記述します。
 

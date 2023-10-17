@@ -39,5 +39,7 @@ int main() {
     app.running(info);
 }
 ```
+![img](../../asset/delta&framerate.png)
+
 update内で呼ぶだけでできます。  
 もしフレームレートの上限を設定したくない場合は-1を入れることで無制限になります。
