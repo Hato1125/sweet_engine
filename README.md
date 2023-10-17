@@ -1,5 +1,8 @@
 <div align="center">
 
+<!-- TODO アイコン作る -->
+<img src="./asset/icon.svg" width="100px">
+
 # SweetEngine
 
 シンプルなC++2Dゲームエンジン。
