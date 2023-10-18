@@ -46,11 +46,14 @@ namespace sweet {
         if(info.on_initing != nullptr)
             info.on_initing(*this);
 
+        SDL_Renderer *renderer = _renderer.get();
+        SDL_Window *window = _window.get();
+
         if(SDL_Init(SDL_INIT_EVERYTHING) < 0
             || IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG) < 0
             || TTF_Init() < 0
-            || _window.get() == nullptr
-            || _renderer.get() == nullptr)
+            || window == nullptr
+            || renderer == nullptr)
             return;
 
         if(info.on_inited != nullptr)
@@ -76,12 +79,12 @@ namespace sweet {
                     info.on_event(*this, event);
             }
 
-            SDL_RenderClear(_renderer.get());
+            SDL_RenderClear(renderer);
 
             if(info.on_render != nullptr)
                 info.on_render(*this);
 
-            SDL_RenderPresent(_renderer.get());
+            SDL_RenderPresent(renderer);
         }
 
         LOOP_FINISH:

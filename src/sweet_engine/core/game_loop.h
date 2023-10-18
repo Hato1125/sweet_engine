@@ -8,8 +8,9 @@
 namespace sweet{
     class GameLoop {
     private:
-        float _last_time;
-        float _delta_time;
+        double _last_time;
+        double _frame_ms;
+        double _delta_time;
         float _max_framerate_ms;
         float _ms_counter;
         float _framerate;
@@ -24,6 +25,7 @@ namespace sweet{
 
         void set_max_framerate(float fps);
 
+        float get_frame_ms() const;
         float get_delta_time() const;
         uint32_t get_framerate() const;
     };

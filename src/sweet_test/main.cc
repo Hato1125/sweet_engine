@@ -14,20 +14,16 @@ static sweet::FontRender *font = nullptr;
 static sweet::Application *app = nullptr;
 static sweet::GameLoop game_loop = {};
 
-static uint32_t counter;
-
 void inited(sweet::Application& app) {
-    /*
     sprt = new sweet::Sprite(app.get_renderer(), "/Users/toha/Desktop/macOS-Graphic.jpeg");
     sprt->horizontal_scale = 0.07f;
     sprt->vertical_scale = 0.07f;
     sprt->renderer_h_pos = sweet::HorizontalPoint::center;
     sprt->renderer_v_pos = sweet::VerticalPoint::center;
-    */
 
     sweet::FontInfo info {};
     info.color = sweet::Color(255, 255, 255);
-    info.point = 60;
+    info.point = 40;
     font = new sweet::FontRender(app.get_renderer(), info, "/Library/Fonts/SF-Mono-Light.otf", "Hello World\nKaigyouTest1\nKaigyouTest2");
     font->alignment = sweet::FontAlignment::center;
 }
@@ -35,14 +31,12 @@ void inited(sweet::Application& app) {
 void update(sweet::Application& app) {
     game_loop.update();
     sweet::Keyboard::update();
-
-    ++counter;
 }
 
 void render(sweet::Application& app) {
     //sprt->render(1280 / 2, 720 / 2);
-    font->set_text(std::to_string(counter));
-    font->render(480, 180);
+    font->set_text("delta time: " + std::to_string(game_loop.get_delta_time()) + "\nframe time: " + std::to_string(game_loop.get_frame_ms()) + "\nfps: " + std::to_string(game_loop.get_framerate()));
+    font->render(300, 180);
 }
 
 void event(sweet::Application& app, SDL_Event& e) {
@@ -57,10 +51,16 @@ int main(int args, char** argc) {
         .on_event = event,
     };
 
+    uint32_t window_flags = SDL_WINDOW_SHOWN;
+    uint32_t renderer_flags = SDL_RENDERER_ACCELERATED
+        | SDL_RENDERER_TARGETTEXTURE;
+
     app = new sweet::Application(
         "window",
         {SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED},
-        {1280, 720}
+        {1280, 720},
+        window_flags,
+        renderer_flags
     );
 
     game_loop.set_max_framerate(60.0f);

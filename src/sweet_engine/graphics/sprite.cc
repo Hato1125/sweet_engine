@@ -82,24 +82,24 @@ namespace sweet {
             rect.height = _height;
         }
 
-        Point<float> render_pos {
+        const Point<float> render_pos {
             calclate_horizontal_point(rect.width * horizontal_scale, renderer_h_pos),
             calclate_vertical_point(rect.height * vertical_scale, renderer_v_pos)
         };
 
-        SDL_FPoint rotation_pos {
+        const SDL_FPoint rotation_pos {
             calclate_horizontal_point(rect.width * horizontal_scale, rotation_h_pos),
             calclate_vertical_point(rect.height * vertical_scale, rotation_v_pos)
         };
 
-        SDL_Rect image_rect {
+        const SDL_Rect image_rect {
             rect.x,
             rect.y,
             rect.width,
             rect.height
         };
 
-        SDL_FRect render_rect {
+        const SDL_FRect render_rect {
             x - render_pos.x,
             y - render_pos.y,
             rect.width * horizontal_scale,
