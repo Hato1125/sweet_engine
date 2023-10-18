@@ -23,8 +23,8 @@ namespace sweet {
         std::string buffer {};
         std::vector<std::string> lines {};
 
-        for(int i = 0; i < _text.size(); i++) {
-            for(int j = 0; j < _split_char.size(); j++) {
+        for(int i = 0; i < _text.size(); ++i) {
+            for(int j = 0; j < _split_char.size(); ++j) {
                 if(_text[i] == _split_char[j]) {
                     lines.push_back(buffer);
                     buffer.clear();
@@ -45,7 +45,7 @@ namespace sweet {
         _lines.clear();
 
         std::vector<std::string> lines = split_line();
-        for(int i = 0; i < lines.size(); i++)
+        for(int i = 0; i < lines.size(); ++i)
             _lines.push_back({_renderer, _info, _font, lines[i]});
     }
 
@@ -53,7 +53,7 @@ namespace sweet {
         float pos_x = 0.0f;
         float pos_y = 0.0f;
 
-        for(int i = 0; i < _lines.size(); i++) {
+        for(int i = 0; i < _lines.size(); ++i) {
             switch(alignment) {
                 case FontAlignment::left: {
                     pos_x = 0.0f;
@@ -111,7 +111,7 @@ namespace sweet {
     Size<uint32_t> FontRender::get_size() const {
         Size<uint32_t> size {0, 0};
 
-        for(int i = 0; i < _lines.size(); i++) {
+        for(int i = 0; i < _lines.size(); ++i) {
             if(size.width < _lines[i].get_sprite()->get_width()) {
                 size.width = _lines[i].get_sprite()->get_width();
             }

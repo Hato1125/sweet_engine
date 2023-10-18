@@ -1,3 +1,4 @@
+#include <iostream>
 #include "sprite.h"
 
 namespace sweet {
@@ -30,7 +31,7 @@ namespace sweet {
             _texture.reset(texture);
 
             SDL_QueryTexture(
-                _texture.get(),
+                texture,
                 &_format,
                 nullptr,
                 reinterpret_cast<int*>(&_width),
@@ -43,6 +44,8 @@ namespace sweet {
 
     Sprite::Sprite(SDL_Renderer *renderer, SDL_Surface *surface)
         : Sprite(renderer, SDL_CreateTextureFromSurface(renderer, surface)) {
+        if(surface != nullptr)
+            SDL_FreeSurface(surface);
     }
 
     Sprite::Sprite(SDL_Renderer *renderer, const std::string &path)
@@ -68,7 +71,10 @@ namespace sweet {
     }
 
     void Sprite::render(float x, float y, Rectangle<int> rect) {
-        if(_renderer == nullptr || _texture.get() == nullptr)
+        // _texture.get()の呼び出し回数を少なくするためにここで変数に入れとく
+        SDL_Texture *texture = _texture.get();
+
+        if(_renderer == nullptr || texture == nullptr)
             return;
 
         if(rect == Rectangle<int> {0, 0, 0, 0}) {
@@ -100,13 +106,13 @@ namespace sweet {
             rect.height * vertical_scale
         };
 
-        SDL_SetTextureBlendMode(_texture.get(), blend_mode);
-        SDL_SetTextureScaleMode(_texture.get(), scale_mode);
-        SDL_SetTextureAlphaMod(_texture.get(), alpha);
-        SDL_SetTextureColorMod(_texture.get(), blend_color.r, blend_color.g, blend_color.b);
+        SDL_SetTextureBlendMode(texture, blend_mode);
+        SDL_SetTextureScaleMode(texture, scale_mode);
+        SDL_SetTextureAlphaMod(texture, alpha);
+        SDL_SetTextureColorMod(texture, blend_color.r, blend_color.g, blend_color.b);
         SDL_RenderCopyExF(
             _renderer,
-            _texture.get(),
+            texture,
             &image_rect,
             &render_rect,
             rotation_angle,

@@ -14,27 +14,34 @@ static sweet::FontRender *font = nullptr;
 static sweet::Application *app = nullptr;
 static sweet::GameLoop game_loop = {};
 
+static uint32_t counter;
+
 void inited(sweet::Application& app) {
+    /*
     sprt = new sweet::Sprite(app.get_renderer(), "/Users/toha/Desktop/macOS-Graphic.jpeg");
     sprt->horizontal_scale = 0.07f;
     sprt->vertical_scale = 0.07f;
     sprt->renderer_h_pos = sweet::HorizontalPoint::center;
     sprt->renderer_v_pos = sweet::VerticalPoint::center;
+    */
 
     sweet::FontInfo info {};
     info.color = sweet::Color(255, 255, 255);
     info.point = 60;
-    font = new sweet::FontRender(app.get_renderer(), info, "/Users/toha/Desktop/Roboto-MediumItalic.ttf", "Hello World\nKaigyouTest1\nKaigyouTest2");
+    font = new sweet::FontRender(app.get_renderer(), info, "/Library/Fonts/SF-Mono-Light.otf", "Hello World\nKaigyouTest1\nKaigyouTest2");
     font->alignment = sweet::FontAlignment::center;
 }
 
 void update(sweet::Application& app) {
     game_loop.update();
     sweet::Keyboard::update();
+
+    ++counter;
 }
 
 void render(sweet::Application& app) {
     //sprt->render(1280 / 2, 720 / 2);
+    font->set_text(std::to_string(counter));
     font->render(480, 180);
 }
 

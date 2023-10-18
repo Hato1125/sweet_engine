@@ -24,14 +24,14 @@ namespace sweet {
             return;
         }
 
-        for(int i = 0; i < scenes.size(); i++)
+        for(int i = 0; i < scenes.size(); ++i)
             _scenes[name].push_back(scenes[i]);
     }
 
     void SceneManager::regist_scene(const std::string &name, const std::vector<SceneBase*> &scenes) {
         scene_vector svec {};
 
-        for(int i = 0; i < scenes.size(); i++)
+        for(int i = 0; i < scenes.size(); ++i)
             svec.push_back(std::shared_ptr<SceneBase>(scenes[i]));
 
         regist_scene(name, svec);
@@ -43,7 +43,7 @@ namespace sweet {
     }
 
     void SceneManager::remove_scene(const std::vector<std::string> &names) {
-        for(int i = 0; i < names.size(); i++)
+        for(int i = 0; i < names.size(); ++i)
             remove_scene(names[i]);
     }
 
@@ -52,13 +52,13 @@ namespace sweet {
             return;
 
         if(_current_scene_name != "") {
-            for(int i = 0; i < _scenes[_current_scene_name].size(); i++)
+            for(int i = 0; i < _scenes[_current_scene_name].size(); ++i)
                 _scenes[_current_scene_name][i]->finish();
         }
 
         _current_scene_name = name;
 
-        for(int i = 0; i < _scenes[_current_scene_name].size(); i++)
+        for(int i = 0; i < _scenes[_current_scene_name].size(); ++i)
             _scenes[_current_scene_name][i]->init();
     }
 
@@ -66,7 +66,7 @@ namespace sweet {
         if(!_scenes.contains(_current_scene_name) || _current_scene_name == "")
             return;
 
-        for(int i = 0; i < _scenes[_current_scene_name].size(); i++) {
+        for(int i = 0; i < _scenes[_current_scene_name].size(); ++i) {
             auto &scene = _scenes[_current_scene_name][i];
             scene->update();
             scene->render();
