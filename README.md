@@ -31,3 +31,4 @@
 - [チュートリアル](./doc/tutorial "チュートリアル")
     - [Windowの表示](./doc/tutorial/open_window.md "Windowの表示")
     - [ゲームループ](./doc/tutorial/game_loop.md "ゲームループ")
+    - [Spriteの描画](./doc/tutorial/sprite.md "Spriteの描画")
