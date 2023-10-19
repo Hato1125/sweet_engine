@@ -93,17 +93,17 @@ namespace sweet {
         };
 
         const SDL_Rect image_rect {
-            rect.x,
-            rect.y,
-            rect.width,
-            rect.height
+            .x = rect.x,
+            .y = rect.y,
+            .w = rect.width,
+            .h = rect.height
         };
 
         const SDL_FRect render_rect {
             x - render_pos.x,
             y - render_pos.y,
-            rect.width * horizontal_scale,
-            rect.height * vertical_scale
+            (rect.width - rect.x) * horizontal_scale,
+            (rect.height - rect.y) * vertical_scale
         };
 
         SDL_SetTextureBlendMode(texture, blend_mode);

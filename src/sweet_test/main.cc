@@ -10,38 +10,41 @@
 
 #undef main
 
-static sweet::Sprite *sprt = nullptr;
-static sweet::FontRender *font = nullptr;
 static sweet::Application *app = nullptr;
 static sweet::GameLoop game_loop = {};
 
-void inited(sweet::Application& app) {
-    sprt = new sweet::Sprite(app.get_renderer(), "/Users/toha/Desktop/macOS-Graphic.jpeg");
-    sprt->horizontal_scale = 0.07f;
-    sprt->vertical_scale = 0.07f;
-    sprt->renderer_h_pos = sweet::HorizontalPoint::center;
-    sprt->renderer_v_pos = sweet::VerticalPoint::center;
+sweet::Sprite* img = nullptr;
 
-    sweet::FontInfo info {};
-    info.color = SW_WHITE;
-    info.point = 40;
-    font = new sweet::FontRender(app.get_renderer(), info, "/Library/Fonts/SF-Mono-Light.otf", "Hello World\nKaigyouTest1\nKaigyouTest2");
-    font->alignment = sweet::FontAlignment::center;
+void inited(sweet::Application& app) {
+    img = new sweet::Sprite(
+        app.get_renderer(),
+        "/Users/toha/Desktop/icon.png"
+    );
 }
 
 void update(sweet::Application& app) {
     game_loop.update();
-    sweet::Keyboard::update();
 }
 
 void render(sweet::Application& app) {
-    //sprt->render(1280 / 2, 720 / 2);
-    font->set_text("delta time: " + std::to_string(game_loop.get_delta_time()) + "\nframe time: " + std::to_string(game_loop.get_frame_ms()) + "\nfps: " + std::to_string(game_loop.get_framerate()));
-    font->render(300, 180);
+    sweet::Rectangle<int> rect {
+        100,
+        0,
+        static_cast<int>(img->get_width()),
+        static_cast<int>(img->get_height())
+    };
+
+    // Spriteの描画
+    img->render(0, 0, rect);
 }
 
 void event(sweet::Application& app, SDL_Event& e) {
     sweet::Keyboard::update_event(e);
+}
+
+void finishing(sweet::Application &app) {
+    // Spriteの破棄
+    delete img;
 }
 
 int main(int args, char** argc) {
@@ -50,6 +53,7 @@ int main(int args, char** argc) {
         .on_update = update,
         .on_render = render,
         .on_event = event,
+        .on_finishing = finishing
     };
 
     uint32_t window_flags = SDL_WINDOW_SHOWN;
@@ -67,7 +71,6 @@ int main(int args, char** argc) {
     game_loop.set_max_framerate(60.0f);
     app->running(info);
 
-    delete sprt;
     delete app;
 
     return 0;
