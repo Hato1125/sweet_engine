@@ -30,6 +30,7 @@ namespace sweet {
         static void remove_scene(const std::vector<std::string> &names);
         static void change_scene(const std::string &name);
         static void update_scene();
+        static void render_scene();
     };
 }
 

@@ -67,9 +67,16 @@ namespace sweet {
             return;
 
         for(int i = 0; i < _scenes[_current_scene_name].size(); ++i) {
-            auto &scene = _scenes[_current_scene_name][i];
-            scene->update();
-            scene->render();
+            _scenes[_current_scene_name][i]->update();
+        }
+    }
+
+    void SceneManager::render_scene() {
+        if(!_scenes.contains(_current_scene_name) || _current_scene_name == "")
+            return;
+
+        for(int i = 0; i < _scenes[_current_scene_name].size(); ++i) {
+            _scenes[_current_scene_name][i]->render();
         }
     }
 }
