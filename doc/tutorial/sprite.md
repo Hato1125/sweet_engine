@@ -5,7 +5,7 @@
 画像を描画したい際にはSpriteクラスを使います。  
 Spriteクラスを初期化する際には、レンダラーと描画したい画像のパスを指定します。  
 初期化する際は必ず、**inited以降に呼ばれる関数で初期化**してください。  
-initedよりも前に呼ばれる関数ではSDL_imageが初期化されていない状態なので、画像の読み込みに失敗する可能性があります。
+initedよりも前に呼ばれる関数ではSDL_imageが初期化されていない状態なので、画像の読み込みに**失敗**する可能性があります。
 ```cpp
 #include <sprite.h>
 
@@ -30,7 +30,7 @@ void finishing(sweet::Application &app) {
 }
 ```
 
-![img](../../asset/render_sprite.png)
+![img](../../asset/render_sprite.webp)
 
 Spriteクラスは解放を忘れた場合でも、読み込まれた画像のTextureはしっかり破棄されます。  
 良い子はスマートポインタを使ってください。  
@@ -51,4 +51,4 @@ void render(sweet::Application &app) {
 ```
 
 
-![img](../../asset/render_clip_sprite.png)
+![img](../../asset/render_clip_sprite.webp)

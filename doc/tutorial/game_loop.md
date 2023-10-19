@@ -43,6 +43,6 @@ int main(int, char**) {
     return 0;
 }
 ```
-![img](../../asset/delta&framerate.png)
+![img](../../asset/delta&framerate.webp)
 
 もしフレームレートを無制限にしたい場合は、最大フレームレートを-1にすることで実現できます。

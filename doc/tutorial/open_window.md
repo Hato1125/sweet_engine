@@ -23,7 +23,7 @@ int main(int, char**) {
 }
 ```
 
-![img](../../asset/window.png)
+![img](../../asset/window.webp)
 
 また、WindowFlags、RenderFlags、GraphicsDriverIndexを指定したい場合は、Applicationクラスの第3引数以降に記述します。
 
