@@ -2,7 +2,7 @@
 
 namespace sweet {
     FontInfo::FontInfo() {
-        color = {255, 255, 255};
+        color = SW_WHITE;
         style = FontStyle::normal;
         hinting = FontHinting::normal;
         point = 20;

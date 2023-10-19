@@ -3,6 +3,7 @@
 #include <keyboard.h>
 #include <game_loop.h>
 #include <application.h>
+#include <color.h>
 #include <application_loop_info.h>
 
 #include <iostream>
@@ -22,7 +23,7 @@ void inited(sweet::Application& app) {
     sprt->renderer_v_pos = sweet::VerticalPoint::center;
 
     sweet::FontInfo info {};
-    info.color = sweet::Color(255, 255, 255);
+    info.color = SW_WHITE;
     info.point = 40;
     font = new sweet::FontRender(app.get_renderer(), info, "/Library/Fonts/SF-Mono-Light.otf", "Hello World\nKaigyouTest1\nKaigyouTest2");
     font->alignment = sweet::FontAlignment::center;

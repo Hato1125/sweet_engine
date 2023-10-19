@@ -31,8 +31,8 @@ namespace sweet {
         FontStyle style;
         FontHinting hinting;
         uint32_t point;
-        uint32_t text_space;
-        uint32_t line_space;
+        int32_t text_space;
+        int32_t line_space;
 
         bool operator ==(const FontInfo &info) const;
         bool operator !=(const FontInfo &info) const;
