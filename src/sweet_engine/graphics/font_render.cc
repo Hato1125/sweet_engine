@@ -116,8 +116,7 @@ namespace sweet {
                 size.width = _lines[i].get_sprite()->get_width();
             }
 
-            if(size.height < _lines[i].get_sprite()->get_height())
-                size.height = _lines[i].get_sprite()->get_height();
+            size.height += _lines[i].get_sprite()->get_height();
         }
 
         return size;
