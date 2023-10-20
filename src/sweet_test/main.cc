@@ -16,6 +16,10 @@ static sweet::GameLoop game_loop = {};
 sweet::Sprite* img = nullptr;
 
 void inited(sweet::Application& app) {
+    sweet::FontInfo info {
+        .color = SW_WHITE
+    };
+
     img = new sweet::Sprite(
         app.get_renderer(),
         "/Users/toha/Desktop/icon.png"
@@ -30,8 +34,8 @@ void render(sweet::Application& app) {
     sweet::Rectangle<int> rect {
         100,
         0,
-        static_cast<int>(img->get_width()),
-        static_cast<int>(img->get_height())
+        img->get_width(),
+        img->get_height()
     };
 
     // Spriteの描画

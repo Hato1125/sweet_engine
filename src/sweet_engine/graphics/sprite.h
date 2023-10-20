@@ -35,8 +35,8 @@ namespace sweet {
             float calclate_vertical_point(float height, VerticalPoint pos) const;
 
             uint64_t _byte;
-            uint32_t _width;
-            uint32_t _height;
+            int32_t _width;
+            int32_t _height;
             uint32_t _format;
 
         public:
@@ -63,23 +63,19 @@ namespace sweet {
             void render(
                 float x,
                 float y,
-                Rectangle<int> rect = {
-                    0, 0, 0, 0
-                }
+                Rectangle<int32_t> rect = {}
             );
 
             void render(
-                const Point<float>& pos,
-                Rectangle<int> rect = {
-                    0, 0, 0, 0
-                }
+                const Point<float> &pos,
+                Rectangle<int32_t> rect = {}
             );
 
             uint64_t get_byte() const;
-            uint32_t get_width() const;
-            uint32_t get_height() const;
+            int32_t get_width() const;
+            int32_t get_height() const;
 
-            [[nodiscard]] SDL_Texture* get_texture() const;
+            [[nodiscard]] SDL_Texture *get_texture() const;
     };
 }
 

@@ -34,8 +34,8 @@ namespace sweet {
                 texture,
                 &_format,
                 nullptr,
-                reinterpret_cast<int*>(&_width),
-                reinterpret_cast<int*>(&_height)
+                &_width,
+                &_height
             );
 
             _byte = SDL_BYTESPERPIXEL(_format) * _width * _height;
@@ -70,14 +70,14 @@ namespace sweet {
         }
     }
 
-    void Sprite::render(float x, float y, Rectangle<int> rect) {
+    void Sprite::render(float x, float y, Rectangle<int32_t> rect) {
         // _texture.get()の呼び出し回数を少なくするためにここで変数に入れとく
         SDL_Texture *texture = _texture.get();
 
         if(_renderer == nullptr || texture == nullptr)
             return;
 
-        if(rect == Rectangle<int> {0, 0, 0, 0}) {
+        if(rect == Rectangle<int32_t> {0, 0, 0, 0}) {
             rect.width = _width;
             rect.height = _height;
         }
@@ -121,7 +121,7 @@ namespace sweet {
         );
     }
 
-    void Sprite::render(const Point<float> &pos, Rectangle<int> rect) {
+    void Sprite::render(const Point<float> &pos, Rectangle<int32_t> rect) {
         render(pos.x, pos.y, rect);
     }
 
@@ -129,15 +129,15 @@ namespace sweet {
         return _byte;
     }
 
-    uint32_t Sprite::get_width() const {
+    int32_t Sprite::get_width() const {
         return _width;
     }
 
-    uint32_t Sprite::get_height() const {
+    int32_t Sprite::get_height() const {
         return _height;
     }
 
-    SDL_Texture* Sprite::get_texture() const {
+    SDL_Texture *Sprite::get_texture() const {
         return _texture.get();
     }
 }

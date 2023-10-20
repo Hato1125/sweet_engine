@@ -8,9 +8,9 @@
 namespace sweet{
     class GameLoop {
     private:
-        double _last_time;
-        double _frame_ms;
-        double _delta_time;
+        float _last_time;
+        float _frame_ms;
+        float _delta_time;
         float _max_framerate_ms;
         float _ms_counter;
         float _framerate;

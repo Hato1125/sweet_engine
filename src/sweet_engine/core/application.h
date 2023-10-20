@@ -38,16 +38,16 @@ namespace sweet {
         void running(const ApplicationLoopInfo &info);
 
         void set_window_title(const std::string &title);
-        void set_window_pos(const Point<uint32_t> &pos);
-        void set_window_size(const Size<uint32_t> &size);
-        void set_window_minimum_size(const Size<uint32_t> &size);
-        void set_window_maximum_size(const Size<uint32_t> &size);
+        void set_window_pos(const Point<int32_t> &pos);
+        void set_window_size(const Size<int32_t> &size);
+        void set_window_minimum_size(const Size<int32_t> &size);
+        void set_window_maximum_size(const Size<int32_t> &size);
 
         std::string get_window_title() const;
-        Point<uint32_t> get_window_pos() const;
-        Size<uint32_t> get_window_size() const;
-        Size<uint32_t> get_window_minimum_size() const;
-        Size<uint32_t> get_window_maximum_size() const;
+        Point<int32_t> get_window_pos() const;
+        Size<int32_t> get_window_size() const;
+        Size<int32_t> get_window_minimum_size() const;
+        Size<int32_t> get_window_maximum_size() const;
 
         [[nodiscard]] SDL_Window *get_window() const;
         [[nodiscard]] SDL_Renderer *get_renderer() const;

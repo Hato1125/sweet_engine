@@ -2,7 +2,7 @@
 
 namespace sweet {
     void GameLoop::calc_delta_time() {
-        double now_tick = static_cast<double>(SDL_GetTicks());
+        double now_tick = static_cast<float>(SDL_GetTicks());
 
         _frame_ms = (now_tick - _last_time) / 1000.0f;
         _last_time = now_tick;
@@ -25,7 +25,7 @@ namespace sweet {
 
     void GameLoop::limmit_framerate() {
         while(_max_framerate_ms >= 0
-            && SDL_GetTicks() < _last_time + _max_framerate_ms * 1000.0);
+            && SDL_GetTicks() < _last_time + _max_framerate_ms * 1000.0f);
     }
 
     void GameLoop::update() {
