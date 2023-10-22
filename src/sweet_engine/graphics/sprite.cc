@@ -18,7 +18,7 @@ namespace sweet {
         rotation_h_pos = HorizontalPoint::left;
         rotation_v_pos = VerticalPoint::top;
 
-        blend_color = SW_WHITE;
+        blend_color = SW_COLOR_WHITE;
         blend_mode = SDL_BLENDMODE_BLEND;
         scale_mode = SDL_ScaleMode::SDL_ScaleModeNearest;
         renderer_flip = SDL_FLIP_NONE;

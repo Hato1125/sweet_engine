@@ -25,7 +25,7 @@ namespace sweet {
     };
 
     struct FontInfo {
-        Color color {SW_WHITE};
+        Color color {SW_COLOR_WHITE};
         FontStyle style {FontStyle::normal};
         FontHinting hinting {FontHinting::normal};
         int32_t point {20};

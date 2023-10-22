@@ -18,7 +18,7 @@ sweet::Sprite* img = nullptr;
 
 void inited(sweet::Application& app) {
     sweet::FontInfo info {
-        .color = SW_WHITE
+        .color = SW_COLOR_WHITE
     };
 
     img = new sweet::Sprite(
@@ -56,9 +56,9 @@ int main(int args, char** argc) {
     std::filesystem::path current_path = std::filesystem::path(argc[0]);
     sweet::Logger::init_log(current_path.parent_path().string() + "/log.txt");
 
-    SW_FATAL("Test Message");
-    SW_ERROR("Test Message");
-    SW_WARN("Test Message");
+    SW_LOG_FATAL("Test Message");
+    SW_LOG_ERROR("Test Message");
+    SW_LOG_WARN("Test Message");
 
     sweet::ApplicationLoopInfo info {
         .on_inited = inited,

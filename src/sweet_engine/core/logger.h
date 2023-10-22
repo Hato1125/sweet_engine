@@ -34,7 +34,7 @@ namespace sweet {
     };
 
     // 参考 https://qiita.com/nanasess/items/350e59b29cceb2f122b3
-    #define SW_FATAL(message) { \
+    #define SW_LOG_FATAL(message) { \
         std::stringstream mes; \
         mes \
             << "[FATAL] " \
@@ -46,7 +46,7 @@ namespace sweet {
         std::cerr << "\x1b[38;2;255;0;0m" << mes.str() << "\x1b[m" <<'\n'; \
     }
 
-    #define SW_ERROR(message) { \
+    #define SW_LOG_ERROR(message) { \
         std::stringstream mes; \
         mes \
             << "[ERROR] " \
@@ -58,7 +58,7 @@ namespace sweet {
         std::cerr << "\x1b[38;2;255;0;0m" << mes.str() << "\x1b[m" <<'\n'; \
     }
 
-    #define SW_WARN(message) { \
+    #define SW_LOG_WARN(message) { \
         std::stringstream mes; \
         mes \
             << "[WARN] " \
@@ -69,7 +69,7 @@ namespace sweet {
         std::cerr << "\x1b[38;2;255;241;0m" << mes.str() << "\x1b[m" <<'\n'; \
     }
 
-    #define SW_INFO(message) { \
+    #define SW_LOG_INFO(message) { \
         std::stringstream mes; \
         mes \
             << "[INFO] " \
@@ -79,7 +79,7 @@ namespace sweet {
         sweet::Logger::write_line_log(mes.str()); \
     }
 
-    #define SW_TRACE(message) { \
+    #define SW_LOG_TRACE(message) { \
         std::stringstream mes; \
         mes \
             << "[TRACE] " \
