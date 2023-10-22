@@ -5,6 +5,7 @@
 #include <application.h>
 #include <color.h>
 #include <application_loop_info.h>
+#include <logger.h>
 
 #include <iostream>
 
@@ -52,6 +53,13 @@ void finishing(sweet::Application &app) {
 }
 
 int main(int args, char** argc) {
+    std::filesystem::path current_path = std::filesystem::path(argc[0]);
+    sweet::Logger::init_log(current_path.parent_path().string() + "/log.txt");
+
+    SW_FATAL("Test Message");
+    SW_ERROR("Test Message");
+    SW_WARN("Test Message");
+
     sweet::ApplicationLoopInfo info {
         .on_inited = inited,
         .on_update = update,
