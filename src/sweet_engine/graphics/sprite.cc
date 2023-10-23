@@ -77,7 +77,7 @@ namespace sweet {
         if(_renderer == nullptr || texture == nullptr)
             return;
 
-        if(rect == Rectangle<int32_t> {0, 0, 0, 0}) {
+        if(rect == Rectangle<int32_t> { 0, 0, 0, 0 }) {
             rect.width = _width;
             rect.height = _height;
         }

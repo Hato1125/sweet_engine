@@ -2,7 +2,7 @@
 #define ENGINE_UNIT_POINT_H_
 
 namespace sweet {
-    template<typename T>
+    template <typename T>
     struct Point {
         T x;
         T y;

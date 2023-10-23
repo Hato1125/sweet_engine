@@ -14,6 +14,7 @@ namespace sweet {
         SceneManager() = delete;
         SceneManager(const SceneManager&) = delete;
         SceneManager(SceneManager&&) = delete;
+        ~SceneManager() = delete;
 
         using smart_scene = std::shared_ptr<SceneBase>;
         using scene_vector = std::vector<smart_scene>;

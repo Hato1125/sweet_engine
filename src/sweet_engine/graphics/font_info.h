@@ -25,12 +25,12 @@ namespace sweet {
     };
 
     struct FontInfo {
-        Color color {SW_COLOR_WHITE};
-        FontStyle style {FontStyle::normal};
-        FontHinting hinting {FontHinting::normal};
-        int32_t point {20};
-        int32_t text_space {0};
-        int32_t line_space {0};
+        Color color { SW_COLOR_WHITE };
+        FontStyle style { FontStyle::normal };
+        FontHinting hinting { FontHinting::normal };
+        int32_t point { 20 };
+        int32_t text_space { 0 };
+        int32_t line_space { 0 };
 
         bool operator ==(const FontInfo &info) const;
         bool operator !=(const FontInfo &info) const;

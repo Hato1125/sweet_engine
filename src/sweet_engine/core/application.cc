@@ -130,7 +130,7 @@ namespace sweet {
 
         SDL_GetWindowPosition(_window.get(), &x, &y);
 
-        return {x, y};
+        return { x, y };
     }
 
     Size<int32_t> Application::get_window_size() const {
@@ -139,7 +139,7 @@ namespace sweet {
 
         SDL_GetWindowSize(_window.get(), &width, &height);
 
-        return {width, height};
+        return { width, height };
     }
 
     Size<int32_t> Application::get_window_minimum_size() const {
@@ -148,7 +148,7 @@ namespace sweet {
 
         SDL_GetWindowMinimumSize(_window.get(), &width, &height);
 
-        return {width, height};
+        return { width, height };
     }
 
     Size<int32_t> Application::get_window_maximum_size() const {
@@ -157,7 +157,7 @@ namespace sweet {
 
         SDL_GetWindowMaximumSize(_window.get(), &width, &height);
 
-        return {width, height};
+        return { width, height };
     }
 
     SDL_Window *Application::get_window() const {

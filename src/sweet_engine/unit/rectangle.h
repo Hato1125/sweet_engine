@@ -2,7 +2,7 @@
 #define ENGINE_UNIT_RECTANGLE_H_
 
 namespace sweet {
-    template<typename T>
+    template <typename T>
     struct Rectangle {
         T x;
         T y;

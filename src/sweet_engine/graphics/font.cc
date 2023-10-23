@@ -26,7 +26,7 @@ namespace sweet {
         TTF_SetFontStyle(font, static_cast<int>(_info.style));
         TTF_SetFontHinting(font, static_cast<int>(_info.hinting));
 
-        SDL_Color color = {_info.color.r, _info.color.g, _info.color.b};
+        SDL_Color color = { _info.color.r, _info.color.g, _info.color.b };
         SDL_Surface *surface =  TTF_RenderUTF8_Blended(font, _text.c_str(), color);
 
         TTF_CloseFont(font);

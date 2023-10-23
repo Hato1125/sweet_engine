@@ -21,7 +21,7 @@ namespace sweet {
         virtual void impl_finish() {}
 
     public:
-        SceneState state {SceneState::active};
+        SceneState state { SceneState::active };
 
         void init();
         void update();

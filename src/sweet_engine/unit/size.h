@@ -2,7 +2,7 @@
 #define ENGINE_UNIT_SIZE_H_
 
 namespace sweet {
-    template<typename T>
+    template <typename T>
     struct Size {
         T width;
         T height;

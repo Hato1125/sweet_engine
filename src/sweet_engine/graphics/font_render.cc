@@ -109,7 +109,7 @@ namespace sweet {
     }
 
     Size<uint32_t> FontRender::get_size() const {
-        Size<uint32_t> size {0, 0};
+        Size<uint32_t> size { 0, 0 };
 
         for(int i = 0; i < _lines.size(); ++i) {
             if(size.width < _lines[i].get_sprite()->get_width()) {

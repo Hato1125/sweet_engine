@@ -12,6 +12,7 @@ namespace sweet {
         Keyboard() = delete;
         Keyboard(const Keyboard&) = delete;
         Keyboard(Keyboard&&) = delete;
+        ~Keyboard() = delete;
 
         static std::array<int8_t, 256> _key_value;
 

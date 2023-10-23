@@ -25,7 +25,7 @@ namespace sweet {
     void Keyboard::update() {
         if(_is_update && !_is_counting_frame && _update_counter < 2) {
             update_key_value();
-            _update_counter++;
+            ++_update_counter;
         }
 
         if(_is_counting_frame) {
@@ -34,7 +34,7 @@ namespace sweet {
             if(_frame_counter > 1)
                 _is_counting_frame = false;
 
-            _frame_counter++;
+            ++_frame_counter;
         }
     }
 
