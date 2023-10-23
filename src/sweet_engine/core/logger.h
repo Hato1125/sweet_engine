@@ -38,7 +38,7 @@ namespace sweet {
         std::stringstream mes; \
         mes \
             << "[FATAL] " \
-            << "[" << __TIMESTAMP__ << "] " \
+            << "[" << __TIME__ << "] " \
             << "[" << __FILE__ << "] " \
             << message; \
         \
@@ -50,7 +50,7 @@ namespace sweet {
         std::stringstream mes; \
         mes \
             << "[ERROR] " \
-            << "[" << __TIMESTAMP__ << "] " \
+            << "[" << __TIME__ << "] " \
             << "[" << __FILE__ << "] " \
             << message; \
         \
@@ -62,7 +62,7 @@ namespace sweet {
         std::stringstream mes; \
         mes \
             << "[WARN] " \
-            << "[" << __TIMESTAMP__ << "] " \
+            << "[" << __TIME__ << "] " \
             << message; \
         \
         sweet::Logger::write_line_log(mes.str()); \
@@ -73,7 +73,7 @@ namespace sweet {
         std::stringstream mes; \
         mes \
             << "[INFO] " \
-            << "[" << __TIMESTAMP__ << "] " \
+            << "[" << __TIME__ << "] " \
             << message; \
         \
         sweet::Logger::write_line_log(mes.str()); \
@@ -83,7 +83,7 @@ namespace sweet {
         std::stringstream mes; \
         mes \
             << "[TRACE] " \
-            << "[" << __TIMESTAMP__ << "] " \
+            << "[" << __TIME__ << "] " \
             << message; \
         \
         sweet::Logger::write_line_log(mes.str()); \
@@ -93,7 +93,7 @@ namespace sweet {
         std::stringstream mes; \
         mes \
             << "[LOG] " \
-            << "[" << __TIMESTAMP__ << "] " \
+            << "[" << __TIME__ << "] " \
             << message; \
         \
         std::cout << mes.str() << '\n'; \
