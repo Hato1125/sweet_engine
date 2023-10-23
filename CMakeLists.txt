@@ -27,6 +27,7 @@ if(CMAKE_BUILD_TYPE STREQUAL "Release")
     set(OUTPUT_DIR ${PROJECT_SOURCE_DIR}/build/release)
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${OUTPUT_DIR}/lib)
     set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${OUTPUT_DIR}/lib)
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${OUTPUT_DIR}/lib)
 
     add_subdirectory(src/sweet_engine)
 
