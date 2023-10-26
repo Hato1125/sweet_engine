@@ -56,9 +56,12 @@ int main(int args, char** argc) {
     std::filesystem::path current_path = std::filesystem::path(argc[0]);
     sweet::Logger::init_log(current_path.parent_path().string() + "/log.txt");
 
-    SW_LOG_FATAL("Test Message");
-    SW_LOG_ERROR("Test Message");
-    SW_LOG_WARN("Test Message");
+    SW_LOG("SweetEngine");
+    SW_LOG_INFO("SweetEngine");
+    SW_LOG_WARN("SweetEngine");
+    SW_LOG_ERROR("SweetEngine");
+    SW_LOG_FATAL("SweetEngine");
+    SW_LOG_DEBUG("SweetEngine");
 
     sweet::ApplicationLoopInfo info {
         .on_inited = inited,

@@ -34,70 +34,83 @@ namespace sweet {
     };
 
     // 参考 https://qiita.com/nanasess/items/350e59b29cceb2f122b3
-    #define SW_LOG_FATAL(message) { \
-        std::stringstream mes; \
-        mes \
-            << "[FATAL] " \
-            << "[" << __TIME__ << "] " \
-            << "[" << __FILE__ << "] " \
-            << message; \
+    #define SW_LOG(message) \
+    do { \
+        std::stringstream out; \
         \
-        sweet::Logger::write_line_log(mes.str()); \
-        std::cerr << "\x1b[38;2;255;0;0m" << mes.str() << "\x1b[m" <<'\n'; \
-    }
+        out << "[" << __TIME__ << "]" \
+            << "[" << "LOG" << "]" \
+            << " " << message; \
+        \
+        std::cout << out.str() << '\n'; \
+    } \
+    while(0)
 
-    #define SW_LOG_ERROR(message) { \
-        std::stringstream mes; \
-        mes \
-            << "[ERROR] " \
-            << "[" << __TIME__ << "] " \
-            << "[" << __FILE__ << "] " \
-            << message; \
+    #define SW_LOG_INFO(message) \
+    do { \
+        std::stringstream out; \
         \
-        sweet::Logger::write_line_log(mes.str()); \
-        std::cerr << "\x1b[38;2;255;0;0m" << mes.str() << "\x1b[m" <<'\n'; \
-    }
+        out << "[" << __TIME__ << "]" \
+            << "[" << "INFO" << "]" \
+            << " " << message; \
+        \
+        sweet::Logger::write_line_log(out.str()); \
+        std::cout << out.str() << '\n'; \
+    } \
+    while(0)
 
-    #define SW_LOG_WARN(message) { \
-        std::stringstream mes; \
-        mes \
-            << "[WARN] " \
-            << "[" << __TIME__ << "] " \
-            << message; \
+    #define SW_LOG_WARN(message) \
+    do { \
+        std::stringstream out; \
         \
-        sweet::Logger::write_line_log(mes.str()); \
-        std::cerr << "\x1b[38;2;255;241;0m" << mes.str() << "\x1b[m" <<'\n'; \
-    }
+        out << "[" << __TIME__ << "]" \
+            << "[" << "WARN" << "]" \
+            << " " << message; \
+        \
+        sweet::Logger::write_line_log(out.str()); \
+        std::cout << "\x1b[103m" << out.str() << "\x1b[0m" << '\n'; \
+    } \
+    while(0)
 
-    #define SW_LOG_INFO(message) { \
-        std::stringstream mes; \
-        mes \
-            << "[INFO] " \
-            << "[" << __TIME__ << "] " \
-            << message; \
+    #define SW_LOG_ERROR(message) \
+    do { \
+        std::stringstream out; \
         \
-        sweet::Logger::write_line_log(mes.str()); \
-    }
+        out << "[" << __TIME__ << "]" \
+            << "[" << "ERROR" << "]" \
+            << "[" << __FILE__ << "]" \
+            << " " << message; \
+        \
+        sweet::Logger::write_line_log(out.str()); \
+        std::cerr << "\x1b[101m" << out.str() << "\x1b[0m" << '\n'; \
+    } \
+    while(0)
 
-    #define SW_LOG_TRACE(message) { \
-        std::stringstream mes; \
-        mes \
-            << "[TRACE] " \
-            << "[" << __TIME__ << "] " \
-            << message; \
+    #define SW_LOG_FATAL(message) \
+    do { \
+        std::stringstream out; \
         \
-        sweet::Logger::write_line_log(mes.str()); \
-    }
+        out << "[" << __TIME__ << "]" \
+            << "[" << "FATAL" << "]" \
+            << "[" << __FILE__ << "]" \
+            << " " << message; \
+        \
+        sweet::Logger::write_line_log(out.str()); \
+        std::cerr << "\x1b[101m" << out.str() << "\x1b[0m" << '\n'; \
+    } \
+    while(0)
 
-    #define SW_LOG(message) { \
-        std::stringstream mes; \
-        mes \
-            << "[LOG] " \
-            << "[" << __TIME__ << "] " \
-            << message; \
+    #define SW_LOG_DEBUG(message) \
+    do { \
+        std::stringstream out; \
         \
-        std::cout << mes.str() << '\n'; \
-    }
+        out << "[" << __TIME__ << "]" \
+            << "[" << "DEBUG" << "]" \
+            << " " << message; \
+        \
+        std::cout << out.str() << '\n'; \
+    } \
+    while(0)
 }
 
 #endif // ENGINE_CORE_LOGGER_H_
