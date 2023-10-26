@@ -14,17 +14,20 @@
 static sweet::Application *app = nullptr;
 static sweet::GameLoop game_loop = {};
 
-sweet::Sprite* img = nullptr;
+static sweet::FontRender *font = nullptr;
 
 void inited(sweet::Application& app) {
-    sweet::FontInfo info {
-        .color = SW_COLOR_WHITE
+    sweet::FontInfo info = {
+        .point = 100,
     };
-
-    img = new sweet::Sprite(
+    font = new sweet::FontRender(
         app.get_renderer(),
-        "/Users/toha/Desktop/icon.png"
+        info,
+        "/Library/Fonts/SF-Compact-Rounded-Black.otf",
+        "Akasoko\nAosoko\nPinksoko"
     );
+
+    std::cout << font->get_size().height << std::endl;
 }
 
 void update(sweet::Application& app) {
@@ -32,15 +35,7 @@ void update(sweet::Application& app) {
 }
 
 void render(sweet::Application& app) {
-    sweet::Rectangle<int> rect {
-        100,
-        0,
-        img->get_width(),
-        img->get_height()
-    };
-
-    // Spriteの描画
-    img->render(0, 0, rect);
+    font->render(0, 0);
 }
 
 void event(sweet::Application& app, SDL_Event& e) {
@@ -48,20 +43,12 @@ void event(sweet::Application& app, SDL_Event& e) {
 }
 
 void finishing(sweet::Application &app) {
-    // Spriteの破棄
-    delete img;
+    delete font;
 }
 
 int main(int args, char** argc) {
     std::filesystem::path current_path = std::filesystem::path(argc[0]);
     sweet::Logger::init_log(current_path.parent_path().string() + "/log.txt");
-
-    SW_LOG("SweetEngine");
-    SW_LOG_INFO("SweetEngine");
-    SW_LOG_WARN("SweetEngine");
-    SW_LOG_ERROR("SweetEngine");
-    SW_LOG_FATAL("SweetEngine");
-    SW_LOG_DEBUG("SweetEngine");
 
     sweet::ApplicationLoopInfo info {
         .on_inited = inited,
@@ -77,8 +64,8 @@ int main(int args, char** argc) {
 
     app = new sweet::Application(
         "window",
-        {SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED},
-        {1280, 720},
+        { SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED },
+        { 1280, 720 },
         window_flags,
         renderer_flags
     );

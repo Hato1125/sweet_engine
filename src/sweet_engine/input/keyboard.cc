@@ -13,8 +13,9 @@ namespace sweet {
 
     void Keyboard::update_key_value() {
         auto state = SDL_GetKeyboardState(nullptr);
+        auto key_length = _key_value.size();
 
-        for(int i = 0; i < _key_value.size(); ++i) {
+        for(int i = 0; i < key_length; ++i) {
             if(state[i] == 1)
                 _key_value[i] = is_pushing(static_cast<SDL_Scancode>(i)) ? 1 : 2;
             else
