@@ -47,6 +47,17 @@ namespace sweet {
         std::vector<std::string> lines = split_line();
         for(const auto &line : lines)
             _lines.push_back({ _renderer, _info, _font, line });
+
+        calc_font_size();
+    }
+
+    void FontRender::calc_font_size() {
+        for(const auto &line : _lines) {
+            if(_size.width < line.get_sprite()->get_width())
+                _size.width = line.get_sprite()->get_width();
+
+            _size.height += line.get_sprite()->get_height();
+        }
     }
 
     void FontRender::render(float x, float y) {
@@ -54,6 +65,8 @@ namespace sweet {
         float pos_y = 0.0f;
 
         for(const auto &line : _lines) {
+            auto font_sprite = line.get_sprite();
+
             switch(alignment) {
                 case FontAlignment::left: {
                     pos_x = 0.0f;
@@ -61,12 +74,12 @@ namespace sweet {
                 };
                 case FontAlignment::center: {
                     Size<uint32_t> size = get_size();
-                    pos_x = (size.width - line.get_sprite()->get_width()) / 2.0f;
+                    pos_x = (size.width - font_sprite->get_width()) / 2.0f;
                     break;
                 }
                 case FontAlignment::right: {
                     Size<uint32_t> size = get_size();
-                    pos_x = size.width - line.get_sprite()->get_width();
+                    pos_x = size.width - font_sprite->get_width();
                     break;
                 }
                 default: {
@@ -75,9 +88,9 @@ namespace sweet {
                 }
             }
 
-            line.get_sprite()->render(x + pos_x, y + pos_y);
+            font_sprite->render(x + pos_x, y + pos_y);
 
-            pos_y += line.get_sprite()->get_height() + _info.line_space;
+            pos_y += font_sprite->get_height() + _info.line_space;
         }
     }
 
@@ -106,16 +119,7 @@ namespace sweet {
     }
 
     Size<uint32_t> FontRender::get_size() const {
-        Size<uint32_t> size { 0, 0 };
-
-        for(const auto &line : _lines) {
-            if(size.width < line.get_sprite()->get_width())
-                size.width = line.get_sprite()->get_width();
-
-            size.height += line.get_sprite()->get_height();
-        }
-
-        return size;
+        return _size;
     }
 
     FontInfo FontRender::get_font_info() const {

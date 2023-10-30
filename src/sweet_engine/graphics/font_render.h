@@ -27,12 +27,14 @@ namespace sweet {
         SDL_Renderer *_renderer;
 
         FontInfo _info;
+        Size<uint32_t> _size;
         std::string _font;
         std::string _text;
         std::vector<Font> _lines;
 
         std::vector<std::string> split_line();
         void update_text();
+        void calc_font_size();
 
     public:
         FontAlignment alignment;

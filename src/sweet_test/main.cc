@@ -29,8 +29,15 @@ void inited(sweet::Application& app) {
     debug_text = std::make_unique<sweet::FontRender>(
         app.get_renderer(),
         font_info,
-        font_name
+        font_name,
+        "Frame ms:\nDelta ms:\nFramerate:"
     );
+
+    auto text_size = debug_text->get_size();
+
+    std::cout
+        << "width:  " << static_cast<int>(text_size.width) << "\n"
+        << "height: " << static_cast<int>(text_size.height) << "\n";
 }
 
 void begin_frame(sweet::Application &app) {
