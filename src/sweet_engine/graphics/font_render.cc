@@ -53,10 +53,12 @@ namespace sweet {
 
     void FontRender::calc_font_size() {
         for(const auto &line : _lines) {
-            if(_size.width < line.get_sprite()->get_width())
-                _size.width = line.get_sprite()->get_width();
+            const auto &sprite = line.get_sprite();
 
-            _size.height += line.get_sprite()->get_height();
+            if(_size.width < sprite->get_width())
+                _size.width = sprite->get_width();
+
+            _size.height += sprite->get_height();
         }
     }
 

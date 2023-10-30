@@ -2,8 +2,8 @@
 
 namespace sweet {
     void SceneBase::init() {
-        for(int i = 0; i < scene_children.size(); ++i)
-            scene_children[i]->init();
+        for(const auto &child : scene_children)
+            child->init();
 
         impl_init();
     }
@@ -12,9 +12,9 @@ namespace sweet {
         if(state == SceneState::inactive || state == SceneState::pause)
             return;
 
-        for(int i = 0; i < scene_children.size(); ++i) {
-            if(scene_children[i]->state == SceneState::active)
-                scene_children[i]->update();
+        for(const auto &child : scene_children) {
+            if(child->state == SceneState::active)
+                child->update();
         }
 
         impl_update();
@@ -24,17 +24,17 @@ namespace sweet {
         if(state == SceneState::inactive)
             return;
 
-        for(int i = 0; i < scene_children.size(); ++i) {
-            if(scene_children[i]->state != SceneState::inactive)
-                scene_children[i]->render();
+        for(const auto &child : scene_children) {
+            if(child->state == SceneState::inactive)
+                child->render();
         }
 
         impl_render();
     }
 
     void SceneBase::finish() {
-        for(int i = 0; i < scene_children.size(); ++i)
-            scene_children[i]->finish();
+        for(const auto &child : scene_children)
+            child->finish();
 
         impl_finish();
     }

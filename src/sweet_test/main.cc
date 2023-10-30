@@ -32,12 +32,6 @@ void inited(sweet::Application& app) {
         font_name,
         "Frame ms:\nDelta ms:\nFramerate:"
     );
-
-    auto text_size = debug_text->get_size();
-
-    std::cout
-        << "width:  " << static_cast<int>(text_size.width) << "\n"
-        << "height: " << static_cast<int>(text_size.height) << "\n";
 }
 
 void begin_frame(sweet::Application &app) {
@@ -95,6 +89,7 @@ int main(int args, char** argc) {
         renderer_flags
     );
 
+    //game_loop.set_max_framerate(60.0);
     app->running(info);
 
     delete app;
