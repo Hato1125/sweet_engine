@@ -7,43 +7,59 @@
 #include <application_loop_info.h>
 #include <logger.h>
 
+#include <memory>
 #include <iostream>
+#include <thread>
 
 #undef main
 
 static sweet::Application *app = nullptr;
 static sweet::GameLoop game_loop = {};
 
-static sweet::FontRender *font = nullptr;
+static std::unique_ptr<sweet::FontRender> debug_text;
 
 void inited(sweet::Application& app) {
-    sweet::FontInfo info = {
-        .point = 100,
+    const sweet::FontInfo font_info {
+        .point = 25,
+        .style = sweet::FontStyle::italic,
     };
-    font = new sweet::FontRender(
-        app.get_renderer(),
-        info,
-        "/Library/Fonts/SF-Compact-Rounded-Black.otf",
-        "Akasoko\nAosoko\nPinksoko"
-    );
 
-    std::cout << font->get_size().height << std::endl;
+    const std::string font_name = "/Library/Fonts/SF-Mono-Heavy.otf";
+
+    debug_text = std::make_unique<sweet::FontRender>(
+        app.get_renderer(),
+        font_info,
+        font_name
+    );
+}
+
+void begin_frame(sweet::Application &app) {
+    game_loop.begin_update();
+}
+
+void end_frame(sweet::Application &app) {
+    game_loop.end_update();
 }
 
 void update(sweet::Application& app) {
-    game_loop.update();
+    std::stringstream debug_message;
+
+    debug_message
+        << "Frame ms:   " << std::to_string(game_loop.get_frame_sec()) << "\n"
+        << "Delta ms:   " << std::to_string(game_loop.get_delta_sec()) << "\n"
+        << "Framerate:  " << std::to_string(game_loop.get_framerate());
+
+    debug_text->set_text(debug_message.str());
 }
 
 void render(sweet::Application& app) {
-    font->render(0, 0);
+    debug_text->render(0, 0);
 }
 
 void event(sweet::Application& app, SDL_Event& e) {
-    sweet::Keyboard::update_event(e);
 }
 
 void finishing(sweet::Application &app) {
-    delete font;
 }
 
 int main(int args, char** argc) {
@@ -55,7 +71,9 @@ int main(int args, char** argc) {
         .on_update = update,
         .on_render = render,
         .on_event = event,
-        .on_finishing = finishing
+        .on_finishing = finishing,
+        .on_begin_frame = begin_frame,
+        .on_end_frame = end_frame
     };
 
     uint32_t window_flags = SDL_WINDOW_SHOWN;
@@ -70,7 +88,6 @@ int main(int args, char** argc) {
         renderer_flags
     );
 
-    game_loop.set_max_framerate(60.0f);
     app->running(info);
 
     delete app;

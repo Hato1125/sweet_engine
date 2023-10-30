@@ -1,49 +1,80 @@
 #include "game_loop.h"
 
+#include <iostream>
+
 namespace sweet {
-    void GameLoop::calc_delta_time() {
-        double now_tick = static_cast<float>(SDL_GetTicks());
-
-        _frame_ms = (now_tick - _last_time) / 1000.0f;
-        _last_time = now_tick;
-
-        _delta_time = _max_framerate_ms >= 0 && _frame_ms > _max_framerate_ms
-            ? _max_framerate_ms
-            : _frame_ms;
+    GameLoop::GameLoop() {
+        _frame_sec = 0.0;
+        _delta_sec = 0.0;
+        _max_frame_sec = -1.0;
+        _second_counter = 0.0;
     }
 
-    void GameLoop::calc_framerate() {
-        _ms_counter += _delta_time;
-        ++_framerate_counter;
+    void GameLoop::begin_calc_frame_sec() {
+        _start_clock = std::chrono::steady_clock::now();
+    }
 
-        if(_ms_counter >= 1.0f) {
-            _framerate = _framerate_counter;
-            _framerate_counter = 0;
-            _ms_counter = 0;
+    void GameLoop::end_limmit_framerate() {
+        if(_max_frame_sec <= -1.0)
+            return;
+
+        double frame_sec = get_now_frame_sec();
+
+        if (frame_sec < _max_frame_sec) {
+            double sleep_s = (_max_frame_sec - frame_sec) * 1000000.0;
+            std::this_thread::sleep_for(
+                std::chrono::microseconds(static_cast<long>(sleep_s))
+            );
         }
     }
 
-    void GameLoop::limmit_framerate() {
-        while(_max_framerate_ms >= 0
-            && SDL_GetTicks() < _last_time + _max_framerate_ms * 1000.0f);
+    void GameLoop::end_calc_frame_sec() {
+        _frame_sec = get_now_frame_sec();
+        _delta_sec = _max_frame_sec > -1.0 && _frame_sec > _max_frame_sec
+            ? _max_frame_sec
+            : _frame_sec;
     }
 
-    void GameLoop::update() {
-        limmit_framerate();
-        calc_delta_time();
-        calc_framerate();
+    void GameLoop::end_calc_framerate() {
+        _second_counter += _frame_sec;
+        ++_frame_count;
+
+        if(_second_counter >= 1.0) {
+            _framerate = _frame_count;
+            _frame_count = 0;
+            _second_counter = 0.0;
+        }
     }
 
-    void GameLoop::set_max_framerate(float fps) {
-        _max_framerate_ms = fps <= 0 ? -1 : 1.0f / fps;
+    double GameLoop::get_now_frame_sec() const {
+        const auto now_clock = std::chrono::high_resolution_clock::now();
+        const auto frame_us = std::chrono::duration<double, std::micro>(
+            now_clock - _start_clock
+        ).count();
+
+        return frame_us / 1000000.0;
     }
 
-    float GameLoop::get_frame_ms() const {
-        return _frame_ms;
+    void GameLoop::begin_update() {
+        begin_calc_frame_sec();
     }
 
-    float GameLoop::get_delta_time() const {
-        return _delta_time;
+    void GameLoop::end_update() {
+        end_limmit_framerate();
+        end_calc_frame_sec();
+        end_calc_framerate();
+    }
+
+    void GameLoop::set_max_framerate(double framerate) {
+        _max_frame_sec = framerate <= -1.0 ? -1.0 : 1.0 / framerate;
+    }
+
+    double GameLoop::get_frame_sec() const {
+        return _frame_sec;
+    }
+
+    double GameLoop::get_delta_sec() const {
+        return _delta_sec;
     }
 
     uint32_t GameLoop::get_framerate() const {

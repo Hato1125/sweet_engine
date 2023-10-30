@@ -63,6 +63,9 @@ namespace sweet {
         is_running = true;
 
         while(is_running) {
+            if(info.on_begin_frame != nullptr)
+                info.on_begin_frame(*this);
+
             if(info.on_update != nullptr)
                 info.on_update(*this);
 
@@ -85,6 +88,9 @@ namespace sweet {
                 info.on_render(*this);
 
             SDL_RenderPresent(renderer);
+
+            if(info.on_end_frame != nullptr)
+                info.on_end_frame(*this);
         }
 
         LOOP_FINISH:

@@ -6,13 +6,15 @@
 namespace sweet {
     class Application;
     struct ApplicationLoopInfo {
-        void (*on_initing)(Application&) {nullptr};
-        void (*on_inited)(Application&) {nullptr};
-        void (*on_update)(Application&) {nullptr};
-        void (*on_render)(Application&) {nullptr};
-        void (*on_finishing)(Application&) {nullptr};
-        void (*on_finished)(Application&) {nullptr};
-        void (*on_event)(Application&, SDL_Event&) {nullptr};
+        void (*on_initing)(Application&) { nullptr };
+        void (*on_inited)(Application&) { nullptr };
+        void (*on_begin_frame)(Application&) { nullptr };
+        void (*on_end_frame)(Application&) { nullptr };
+        void (*on_update)(Application&) { nullptr };
+        void (*on_render)(Application&) { nullptr };
+        void (*on_finishing)(Application&) { nullptr };
+        void (*on_finished)(Application&) { nullptr };
+        void (*on_event)(Application&, SDL_Event&) { nullptr };
     };
 }
 
