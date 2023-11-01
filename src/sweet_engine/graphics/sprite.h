@@ -37,6 +37,8 @@ namespace sweet {
             uint64_t _byte;
             int32_t _width;
             int32_t _height;
+            int32_t _actual_width;
+            int32_t _actual_height;
             uint32_t _format;
 
         public:
@@ -72,8 +74,12 @@ namespace sweet {
             );
 
             uint64_t get_byte() const;
+
             int32_t get_width() const;
             int32_t get_height() const;
+
+            int32_t get_actual_width() const;
+            int32_t get_actual_height() const;
 
             [[nodiscard]] SDL_Texture *get_texture() const;
     };

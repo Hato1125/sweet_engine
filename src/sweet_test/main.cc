@@ -43,14 +43,59 @@ void end_frame(sweet::Application &app) {
 }
 
 void update(sweet::Application& app) {
+    sweet::Keyboard::update();
+
     std::stringstream debug_message;
 
     debug_message
         << "Frame ms:   " << std::to_string(game_loop.get_frame_sec()) << "\n"
         << "Delta ms:   " << std::to_string(game_loop.get_delta_sec()) << "\n"
-        << "Framerate:  " << std::to_string(game_loop.get_framerate());
+        << "Framerate:  " << std::to_string(game_loop.get_framerate()) << "\n"
+        << "Test Message\n"
+        << "Test Message\n"
+        << "Test Message\n"
+        << "Test Message\n"
+        << "Test Message\n"
+        << "Test Message\n"
+        << "Test Message\n"
+        << "Test Message\n"
+        << "Test Message\n"
+        << "Test Message\n"
+        << "Test Message\n"
+        << "Test Message\n"
+        << "Test Message\n"
+        << "Test Message\n"
+        << "Test Message\n"
+        << "Test Message\n"
+        << "Test Message\n"
+        << "Test Message\n"
+        << "Test Message\n"
+        << "Test Message\n"
+        << "Test Message\n"
+        << "Test Message\n"
+        << "Test Message\n"
+        << "Test Message\n"
+        << "Test Message\n"
+        << "Test Message\n"
+        << "Test Message\n"
+        << "Test Message\n"
+        << "Test Message\n"
+        << "Test Message\n"
+        << "Test Message\n"
+        << "Test Message\n"
+        << "Test Message\n"
+        << "Test Message\n"
+        << "Test Message\n"
+        << "Test Message\n"
+        << "Test Message\n"
+        << "Test Message\n"
+        << "Test Message\n"
+        << "Test Message\n";
 
     debug_text->set_text(debug_message.str());
+
+    if(sweet::Keyboard::is_pushed(SDL_SCANCODE_A))
+        debug_text->set_text("Akasoko");
 }
 
 void render(sweet::Application& app) {
@@ -58,6 +103,7 @@ void render(sweet::Application& app) {
 }
 
 void event(sweet::Application& app, SDL_Event& e) {
+    sweet::Keyboard::update_event(e);
 }
 
 void finishing(sweet::Application &app) {

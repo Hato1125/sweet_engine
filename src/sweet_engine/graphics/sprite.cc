@@ -71,7 +71,6 @@ namespace sweet {
     }
 
     void Sprite::render(float x, float y, Rectangle<int32_t> rect) {
-        // _texture.get()の呼び出し回数を少なくするためにここで変数に入れとく
         SDL_Texture *texture = _texture.get();
 
         if(_renderer == nullptr || texture == nullptr)
@@ -106,6 +105,9 @@ namespace sweet {
             (rect.height - rect.y) * vertical_scale
         };
 
+        _actual_width = render_rect.w;
+        _actual_height = render_rect.h;
+
         SDL_SetTextureBlendMode(texture, blend_mode);
         SDL_SetTextureScaleMode(texture, scale_mode);
         SDL_SetTextureAlphaMod(texture, alpha);
@@ -135,6 +137,14 @@ namespace sweet {
 
     int32_t Sprite::get_height() const {
         return _height;
+    }
+
+    int32_t Sprite::get_actual_width() const {
+        return _actual_width;
+    }
+
+    int32_t Sprite::get_actual_height() const {
+        return _actual_height;
     }
 
     SDL_Texture *Sprite::get_texture() const {
