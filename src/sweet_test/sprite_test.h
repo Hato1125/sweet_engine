@@ -3,6 +3,7 @@
 
 #include <memory>
 
+#include <logger.h>
 #include <sprite.h>
 #include <scene_base.h>
 

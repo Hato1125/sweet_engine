@@ -11,6 +11,8 @@ namespace swtest {
         _sprite->vertical_scale = 3.0f;
         _sprite->renderer_h_pos = sweet::HorizontalPoint::center;
         _sprite->renderer_v_pos = sweet::VerticalPoint::center;
+
+        SW_LOG_INFO(std::string{ "Image byte size: " } + std::to_string(_sprite->get_byte()));
     }
 
     void SpriteTest::impl_render() {

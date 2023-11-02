@@ -10,6 +10,7 @@
 #include <size.h>
 #include <point.h>
 #include <keyboard.h>
+#include <logger.h>
 #include <game_loop.h>
 #include <scene_manager.h>
 #include <application.h>
@@ -29,6 +30,7 @@ namespace swtest {
 
         static std::string _current_path;
         static std::string _current_dire;
+        static std::string _output_log_path;
 
     public:
         static std::unique_ptr<sweet::GameLoop> k_game_loop;

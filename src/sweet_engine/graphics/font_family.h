@@ -25,18 +25,10 @@ namespace sweet {
         ligth_subpixel = TTF_HINTING_LIGHT_SUBPIXEL
     };
 
-    struct FontInfo {
+    struct FontFamily {
         std::string font { "none" };
         FontStyle style { FontStyle::normal };
         FontHintting hintting { FontHintting::normal };
-    };
-
-    struct FontFamily {
-        FontInfo font_info { };
-        Color font_color { SW_COLOR_WHITE };
-        int32_t font_size { 0 };
-        int32_t text_space { 0 };
-        int32_t line_space { 0 };
 
         bool operator ==(const FontFamily &family) const;
         bool operator !=(const FontFamily &family) const;

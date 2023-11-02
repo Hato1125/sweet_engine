@@ -6,8 +6,8 @@ namespace swtest {
         const std::string mul_line_text = "Hello World!\nHello World!\nHello World!\nHello World!\nHello World!\n";
         const std::string font_path = "/Library/Fonts/SF-Pro-Rounded-Bold.otf";
 
-        const sweet::FontFamily font_family {
-            .font_info = {
+        const sweet::FontInfo font_info {
+            .font_family = {
                 .font = font_path,
                 .style = sweet::FontStyle::italic
             },
@@ -18,13 +18,13 @@ namespace swtest {
 
         _font = std::make_unique<sweet::Font>(
             Main::k_application->get_renderer(),
-            font_family,
+            font_info,
             one_line_text
         );
 
         _font_render = std::make_unique<sweet::FontRender>(
             Main::k_application->get_renderer(),
-            font_family,
+            font_info,
             mul_line_text
         );
     }

@@ -26,7 +26,7 @@ namespace sweet {
     private:
         SDL_Renderer *_renderer;
 
-        FontFamily _family;
+        FontInfo _info;
         Size<uint32_t> _size;
         std::string _text;
         std::vector<Font> _lines;
@@ -40,17 +40,17 @@ namespace sweet {
 
         FontRender(
             SDL_Renderer *renderer,
-            FontFamily family = { },
+            FontInfo info = {},
             const std::string &text = ""
         );
 
         void render(float x, float y);
 
-        void set_font_family(FontFamily info);
+        void set_font_info(FontInfo info);
         void set_text(const std::string &text);
 
         Size<uint32_t> get_size() const;
-        FontFamily get_font_family() const;
+        FontInfo get_font_info() const;
         std::string get_text() const;
     };
 }

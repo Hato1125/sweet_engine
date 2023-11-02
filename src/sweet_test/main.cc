@@ -10,6 +10,7 @@ namespace swtest {
 
     std::string Main::_current_path = {};
     std::string Main::_current_dire = {};
+    std::string Main::_output_log_path = {};
 
     std::unique_ptr<sweet::GameLoop> Main::k_game_loop = {};
     std::unique_ptr<sweet::Application> Main::k_application = {};
@@ -20,7 +21,10 @@ namespace swtest {
 
             _current_path = current.c_str();
             _current_dire = current.parent_path().c_str();
+            _output_log_path = _current_dire + "/debug.log";
         }
+
+        sweet::Logger::init_log(_output_log_path);
 
         k_game_loop = std::make_unique<sweet::GameLoop>();
         k_application = std::make_unique<sweet::Application>(
