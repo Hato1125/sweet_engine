@@ -1,6 +1,7 @@
-#ifndef ENGINE_GRAPHICS_FONT_INFO_H_
-#define ENGINE_GRAPHICS_FONT_INFO_H_
+#ifndef ENGINE_FONT_FAMILY_H_
+#define ENGINE_FONT_FAMILY_H_
 
+#include <string>
 #include <cstdint>
 
 #include <SDL_ttf.h>
@@ -16,25 +17,30 @@ namespace sweet {
         strikethrough = TTF_STYLE_STRIKETHROUGH
     };
 
-    enum class FontHinting {
+    enum class FontHintting {
         normal = TTF_HINTING_NORMAL,
         light = TTF_HINTING_LIGHT,
         mono = TTF_HINTING_MONO,
         none = TTF_HINTING_NONE,
-        light_subpixel = TTF_HINTING_LIGHT_SUBPIXEL
+        ligth_subpixel = TTF_HINTING_LIGHT_SUBPIXEL
     };
 
     struct FontInfo {
-        Color color { SW_COLOR_WHITE };
+        std::string font { "none" };
         FontStyle style { FontStyle::normal };
-        FontHinting hinting { FontHinting::normal };
-        int32_t point { 20 };
+        FontHintting hintting { FontHintting::normal };
+    };
+
+    struct FontFamily {
+        FontInfo font_info { };
+        Color font_color { SW_COLOR_WHITE };
+        int32_t font_size { 0 };
         int32_t text_space { 0 };
         int32_t line_space { 0 };
 
-        bool operator ==(const FontInfo &info) const;
-        bool operator !=(const FontInfo &info) const;
+        bool operator ==(const FontFamily &family) const;
+        bool operator !=(const FontFamily &family) const;
     };
 }
 
-#endif // ENGINE_GRAPHICS_FONT_INFO_H_
+#endif // ENGINE_FONT_FAMILY_H_

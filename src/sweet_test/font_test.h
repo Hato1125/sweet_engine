@@ -4,7 +4,7 @@
 #include <memory>
 
 #include <font.h>
-#include <font_info.h>
+#include <font_family.h>
 #include <font_render.h>
 #include <scene_base.h>
 

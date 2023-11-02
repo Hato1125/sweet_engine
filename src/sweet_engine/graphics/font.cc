@@ -1,35 +1,38 @@
 #include "font.h"
-#include <iostream>
 
 namespace sweet {
     std::shared_ptr<Sprite> Font::_empty_sprite_font = std::make_shared<Sprite>();
 
     Font::Font(
         SDL_Renderer *renderer,
-        FontInfo info,
-        const std::string &font,
+        FontFamily family,
         const std::string &text
     ) {
         _renderer = renderer;
-        _info = info;
-        _font = font;
+        _family = family;
         _text = text;
 
         update_font_sprite();
     }
 
     SDL_Surface* Font::create_font_surface() {
-        TTF_Font *font = TTF_OpenFont(_font.c_str(), _info.point);
-        if(font == nullptr) {
-            std::cout << SDL_GetError() << "\n";
+        TTF_Font *font = TTF_OpenFont(
+            _family.font_info.font.c_str(),
+            _family.font_size
+        );
+
+        if(font == nullptr)
             return nullptr;
-        }
 
-        TTF_SetFontKerning(font, _info.text_space);
-        TTF_SetFontStyle(font, static_cast<int>(_info.style));
-        TTF_SetFontHinting(font, static_cast<int>(_info.hinting));
+        TTF_SetFontKerning(font, _family.text_space);
+        TTF_SetFontStyle(font, static_cast<int>(_family.font_info.style));
+        TTF_SetFontHinting(font, static_cast<int>(_family.font_info.hintting));
 
-        SDL_Color color = { _info.color.r, _info.color.g, _info.color.b };
+        SDL_Color color = { 
+            _family.font_color.r,
+            _family.font_color.g,
+            _family.font_color.b
+        };
         SDL_Surface *surface =  TTF_RenderUTF8_Blended(font, _text.c_str(), color);
 
         TTF_CloseFont(font);
@@ -48,19 +51,11 @@ namespace sweet {
         _sprite.reset(new Sprite(_renderer, surface));
     }
 
-    void Font::set_font_info(FontInfo info) {
-        if(_info == info)
+    void Font::set_font_family(FontFamily family) {
+        if(_family == family)
             return;
 
-        _info = info;
-        update_font_sprite();
-    }
-
-    void Font::set_font(const std::string &font) {
-        if(_font == font)
-            return;
-
-        _font = font;
+        _family = family;
         update_font_sprite();
     }
 
@@ -72,12 +67,8 @@ namespace sweet {
         update_font_sprite();
     }
 
-    FontInfo Font::get_font_info() const {
-        return _info;
-    }
-
-    std::string Font::get_font() const {
-        return _font;
+    FontFamily Font::get_font_family() const {
+        return _family;
     }
 
     std::string Font::get_text() const {

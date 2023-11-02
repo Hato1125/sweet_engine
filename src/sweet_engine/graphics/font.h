@@ -9,7 +9,7 @@
 #include <SDL_ttf.h>
 
 #include "sprite.h"
-#include "font_info.h"
+#include "font_family.h"
 
 namespace sweet {
     class Font {
@@ -19,8 +19,7 @@ namespace sweet {
     private:
         SDL_Renderer *_renderer;
 
-        FontInfo _info;
-        std::string _font;
+        FontFamily _family;
         std::string _text;
         std::shared_ptr<Sprite> _sprite;
 
@@ -30,17 +29,14 @@ namespace sweet {
     public:
         Font(
             SDL_Renderer *renderer,
-            FontInfo info = {},
-            const std::string &font = "",
+            FontFamily family = {},
             const std::string &text = ""
         );
 
-        void set_font_info(FontInfo info);
-        void set_font(const std::string &font);
+        void set_font_family(FontFamily family);
         void set_text(const std::string &text);
 
-        FontInfo get_font_info() const;
-        std::string get_font() const;
+        FontFamily get_font_family() const;
         std::string get_text() const;
         std::shared_ptr<Sprite> get_sprite() const;
     };

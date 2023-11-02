@@ -5,13 +5,11 @@ namespace sweet {
 
     FontRender::FontRender(
         SDL_Renderer *renderer,
-        FontInfo info,
-        const std::string &font,
+        FontFamily family,
         const std::string &text
     ) {
         _renderer = renderer;
-        _info = info;
-        _font = font;
+        _family = family;
         _text = text;
 
         alignment = FontAlignment::left;
@@ -46,7 +44,7 @@ namespace sweet {
 
         std::vector<std::string> lines = split_line();
         for(const auto &line : lines)
-            _lines.push_back({ _renderer, _info, _font, line });
+            _lines.push_back({ _renderer, _family, line });
 
         calc_font_size();
     }
@@ -92,23 +90,15 @@ namespace sweet {
 
             font_sprite->render(x + pos_x, y + pos_y);
 
-            pos_y += font_sprite->get_height() + _info.line_space;
+            pos_y += font_sprite->get_height() + _family.line_space;
         }
     }
 
-    void FontRender::set_font_info(FontInfo info) {
-        if(_info == info)
+    void FontRender::set_font_family(FontFamily family) {
+        if(_family == family)
             return;
 
-        _info = info;
-        update_text();
-    }
-
-    void FontRender::set_font(const std::string &font) {
-        if(_font == font)
-            return;
-
-        _font = font;
+        _family = family;
         update_text();
     }
 
@@ -124,12 +114,8 @@ namespace sweet {
         return _size;
     }
 
-    FontInfo FontRender::get_font_info() const {
-        return _info;
-    }
-
-    std::string FontRender::get_font() const {
-        return _font;
+    FontFamily FontRender::get_font_family() const {
+        return _family;
     }
 
     std::string FontRender::get_text() const {
