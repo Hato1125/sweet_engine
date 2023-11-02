@@ -1,4 +1,5 @@
 #include "font.h"
+#include <iostream>
 
 namespace sweet {
     std::shared_ptr<Sprite> Font::_empty_sprite_font = std::make_shared<Sprite>();
@@ -19,8 +20,10 @@ namespace sweet {
 
     SDL_Surface* Font::create_font_surface() {
         TTF_Font *font = TTF_OpenFont(_font.c_str(), _info.point);
-        if(font == nullptr)
+        if(font == nullptr) {
+            std::cout << SDL_GetError() << "\n";
             return nullptr;
+        }
 
         TTF_SetFontKerning(font, _info.text_space);
         TTF_SetFontStyle(font, static_cast<int>(_info.style));

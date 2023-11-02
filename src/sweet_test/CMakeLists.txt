@@ -1,11 +1,12 @@
 set(SWEET_TEST_NAME sweet_test)
 
-add_executable(${SWEET_TEST_NAME} "main.cc")
+add_executable(${SWEET_TEST_NAME} "main.cc" "sprite_test.cc" "font_test.cc")
 
 set(
     SWEET_TEST_INCLUDE
     ${SWEET_ENGINE_DIR}/core
     ${SWEET_ENGINE_DIR}/unit
+    ${SWEET_ENGINE_DIR}/scene
     ${SWEET_ENGINE_DIR}/graphics
     ${SWEET_ENGINE_DIR}/input
 )

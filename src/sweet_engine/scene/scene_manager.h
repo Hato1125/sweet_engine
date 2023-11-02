@@ -32,6 +32,8 @@ namespace sweet {
         static void change_scene(const std::string &name);
         static void update_scene();
         static void render_scene();
+
+        [[nodiscard]] static std::map<std::string, scene_vector> &get_scene();
     };
 }
 

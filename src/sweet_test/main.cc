@@ -1,144 +1,144 @@
-#include <font_render.h>
-#include <sprite.h>
-#include <keyboard.h>
-#include <game_loop.h>
-#include <application.h>
-#include <color.h>
-#include <application_loop_info.h>
-#include <logger.h>
+#include "main.h"
 
-#include <memory>
-#include <iostream>
-#include <thread>
+#include "sprite_test.h"
+#include "font_test.h"
 
-#undef main
+namespace swtest {
+    const std::string Main::_window_title = "SweetEngine Test Application";
+    const sweet::Point<uint32_t> Main::_window_point = { SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED };
+    const sweet::Size<uint32_t> Main::_window_size = { 1280, 720 };
 
-static sweet::Application *app = nullptr;
-static sweet::GameLoop game_loop = {};
+    std::string Main::_current_path = {};
+    std::string Main::_current_dire = {};
 
-static std::unique_ptr<sweet::FontRender> debug_text;
+    std::unique_ptr<sweet::GameLoop> Main::k_game_loop = {};
+    std::unique_ptr<sweet::Application> Main::k_application = {};
 
-void inited(sweet::Application& app) {
-    const sweet::FontInfo font_info {
-        .point = 25,
-        .style = sweet::FontStyle::italic,
-    };
+    void Main::initialize_application(const char **argv) {
+        {
+            auto current = std::filesystem::path { argv[0] };
 
-    const std::string font_name = "/Library/Fonts/SF-Mono-Heavy.otf";
+            _current_path = current.c_str();
+            _current_dire = current.parent_path().c_str();
+        }
 
-    debug_text = std::make_unique<sweet::FontRender>(
-        app.get_renderer(),
-        font_info,
-        font_name,
-        "Frame ms:\nDelta ms:\nFramerate:"
-    );
+        k_game_loop = std::make_unique<sweet::GameLoop>();
+        k_application = std::make_unique<sweet::Application>(
+            _window_title,
+            _window_point,
+            _window_size
+        );
+    }
+
+    std::string Main::get_current_path() {
+        return _current_path;
+    }
+
+    std::string Main::get_current_dire() {
+        return _current_dire;
+    }
 }
 
-void begin_frame(sweet::Application &app) {
-    game_loop.begin_update();
+namespace {
+    std::string _debug_scene_name;
+
+    void inited(sweet::Application &app) {
+        sweet::SceneManager::change_scene(_debug_scene_name);
+    }
+
+    void begin_frame(sweet::Application &app) {
+        swtest::Main::k_game_loop->begin_update();
+    }
+
+    void end_frame(sweet::Application &app) {
+        swtest::Main::k_game_loop->end_update();
+    }
+
+    void update(sweet::Application &app) {
+        sweet::Keyboard::update();
+        sweet::SceneManager::update_scene();
+    }
+
+    void render(sweet::Application &app) {
+        sweet::SceneManager::render_scene();
+    }
+
+    void finishing(sweet::Application &app) {
+    }
+
+    void event(sweet::Application &app, SDL_Event &e) {
+        sweet::Keyboard::update_event(e);
+    }
+
+    void regist_debug_scene() {
+        sweet::SceneManager::regist_scene("sprite_test", new swtest::SpriteTest());
+        sweet::SceneManager::regist_scene("font_test", new swtest::FontTest());
+    }
+
+    void output_title() {
+        std::cout << "----------------Sweet Engine Debugger----------------" << "\n";
+    }
+
+    void output_scene_list() {
+        std::cout << "List of registered debug scenes." << "\n";
+
+        for(const auto &[key, value] : sweet::SceneManager::get_scene())
+            std::cout << "| " << key << "\n";
+    }
+
+    bool select_debug_scene() {
+        std::string scene_name {};
+        std::cout << "> ";
+        std::cin >> scene_name;
+
+        if(!sweet::SceneManager::get_scene().contains(scene_name))
+            return false;
+
+        _debug_scene_name = scene_name;
+
+        std::cout
+            << "\x1b[32m"
+            << "[o] Name of selected scene: "
+            << _debug_scene_name
+            << "\x1b[m"
+            << "\n";
+
+        return true;
+    }
+
+    void user_select() {
+        bool is_contains_scene_name = false;
+
+        do {
+            std::cout << "Please enter the name of the scene you want to debug." << "\n";
+            is_contains_scene_name = select_debug_scene();
+
+            if(!is_contains_scene_name) {
+                std::cout
+                    << "\x1b[31m"
+                    << "[x] That scene is not registered."
+                    << "\x1b[m"
+                    << "\n";
+            }
+        } while(!is_contains_scene_name);
+    }
 }
 
-void end_frame(sweet::Application &app) {
-    game_loop.end_update();
-}
+int main(const int argc, const char **argv) {
+    swtest::Main::initialize_application(argv);
 
-void update(sweet::Application& app) {
-    sweet::Keyboard::update();
+    regist_debug_scene();
+    output_title();
+    output_scene_list();
+    user_select();
 
-    std::stringstream debug_message;
-
-    debug_message
-        << "Frame ms:   " << std::to_string(game_loop.get_frame_sec()) << "\n"
-        << "Delta ms:   " << std::to_string(game_loop.get_delta_sec()) << "\n"
-        << "Framerate:  " << std::to_string(game_loop.get_framerate()) << "\n"
-        << "Test Message\n"
-        << "Test Message\n"
-        << "Test Message\n"
-        << "Test Message\n"
-        << "Test Message\n"
-        << "Test Message\n"
-        << "Test Message\n"
-        << "Test Message\n"
-        << "Test Message\n"
-        << "Test Message\n"
-        << "Test Message\n"
-        << "Test Message\n"
-        << "Test Message\n"
-        << "Test Message\n"
-        << "Test Message\n"
-        << "Test Message\n"
-        << "Test Message\n"
-        << "Test Message\n"
-        << "Test Message\n"
-        << "Test Message\n"
-        << "Test Message\n"
-        << "Test Message\n"
-        << "Test Message\n"
-        << "Test Message\n"
-        << "Test Message\n"
-        << "Test Message\n"
-        << "Test Message\n"
-        << "Test Message\n"
-        << "Test Message\n"
-        << "Test Message\n"
-        << "Test Message\n"
-        << "Test Message\n"
-        << "Test Message\n"
-        << "Test Message\n"
-        << "Test Message\n"
-        << "Test Message\n"
-        << "Test Message\n"
-        << "Test Message\n"
-        << "Test Message\n"
-        << "Test Message\n";
-
-    debug_text->set_text(debug_message.str());
-
-    if(sweet::Keyboard::is_pushed(SDL_SCANCODE_A))
-        debug_text->set_text("Akasoko");
-}
-
-void render(sweet::Application& app) {
-    debug_text->render(0, 0);
-}
-
-void event(sweet::Application& app, SDL_Event& e) {
-    sweet::Keyboard::update_event(e);
-}
-
-void finishing(sweet::Application &app) {
-}
-
-int main(int args, char** argc) {
-    std::filesystem::path current_path = std::filesystem::path(argc[0]);
-    sweet::Logger::init_log(current_path.parent_path().string() + "/log.txt");
-
-    sweet::ApplicationLoopInfo info {
+    swtest::Main::k_application->running({
         .on_inited = inited,
+        .on_begin_frame = begin_frame,
+        .on_end_frame = end_frame,
         .on_update = update,
         .on_render = render,
-        .on_event = event,
         .on_finishing = finishing,
-        .on_begin_frame = begin_frame,
-        .on_end_frame = end_frame
-    };
-
-    uint32_t window_flags = SDL_WINDOW_SHOWN;
-    uint32_t renderer_flags = SDL_RENDERER_ACCELERATED
-        | SDL_RENDERER_TARGETTEXTURE;
-
-    app = new sweet::Application(
-        "window",
-        { SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED },
-        { 1280, 720 },
-        window_flags,
-        renderer_flags
-    );
-
-    //game_loop.set_max_framerate(60.0);
-    app->running(info);
-
-    delete app;
-
-    return 0;
+        .on_event = event,
+    });
 }

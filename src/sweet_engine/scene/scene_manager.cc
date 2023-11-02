@@ -77,4 +77,8 @@ namespace sweet {
         for(const auto &scene : _scenes[_current_scene_name])
             scene->render();
     }
+
+    std::map<std::string, scene_vector> &SceneManager::get_scene() {
+        return _scenes;
+    }
 }
