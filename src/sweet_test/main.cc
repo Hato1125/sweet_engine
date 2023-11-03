@@ -27,11 +27,19 @@ namespace swtest {
         sweet::Logger::init_log(_output_log_path);
 
         k_game_loop = std::make_unique<sweet::GameLoop>();
-        k_application = std::make_unique<sweet::Application>(
-            _window_title,
-            _window_point,
-            _window_size
-        );
+        {
+            const uint32_t win_flags = SDL_WINDOW_RESIZABLE;
+            const uint32_t ren_flags = SDL_RENDERER_TARGETTEXTURE
+                | SDL_RENDERER_ACCELERATED;
+
+            k_application = std::make_unique<sweet::Application>(
+                _window_title,
+                _window_point,
+                _window_size,
+                win_flags,
+                ren_flags
+            );
+        }
     }
 
     std::string Main::get_current_path() {

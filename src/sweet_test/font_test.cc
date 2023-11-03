@@ -3,7 +3,7 @@
 namespace swtest {
     void FontTest::impl_init() {
         const std::string one_line_text = "Hello World!";
-        const std::string mul_line_text = "Hello World!\nHello World!\nHello World!\nHello World!\nHello World!\n";
+        const std::string mul_line_text = "Hello World!\nHello World!\nHello World!\nHello World!\nHello World!\nHello World!";
         const std::string font_path = "/Library/Fonts/SF-Pro-Rounded-Bold.otf";
 
         const sweet::FontInfo font_info {
@@ -27,6 +27,54 @@ namespace swtest {
             font_info,
             mul_line_text
         );
+    }
+
+    void FontTest::impl_update() {
+        std::stringstream text;
+
+        text
+            << "Framerate:" << std::to_string(Main::k_game_loop->get_framerate()) << "\n"
+            << "Frame sec: " << std::to_string(Main::k_game_loop->get_frame_sec()) << "\n"
+            << "Delta sec: " << std::to_string(Main::k_game_loop->get_delta_sec()) << "\n"
+            << "Hello World!" << "\n"
+            << "Hello World!" << "\n"
+            << "Hello World!" << "\n"
+            << "Hello World!" << "\n"
+            << "Hello World!" << "\n"
+            << "Hello World!" << "\n"
+            << "Hello World!" << "\n"
+            << "Hello World!" << "\n"
+            << "Hello World!" << "\n"
+            << "Hello World!" << "\n"
+            << "Hello World!" << "\n"
+            << "Hello World!" << "\n"
+            << "Hello World!" << "\n"
+            << "Hello World!" << "\n"
+            << "Hello World!" << "\n"
+            << "Hello World!" << "\n"
+            << "Hello World!" << "\n"
+            << "Hello World!" << "\n"
+            << "Hello World!" << "\n"
+            << "Hello World!" << "\n"
+            << "Hello World!" << "\n"
+            << "Hello World!" << "\n"
+            << "Hello World!" << "\n"
+            << "Hello World!" << "\n"
+            << "Hello World!" << "\n"
+            << "Hello World!" << "\n"
+            << "Hello World!" << "\n"
+            << "Hello World!" << "\n"
+            << "Hello World!" << "\n"
+            << "Hello World!" << "\n"
+            << "Hello World!" << "\n"
+            << "Hello World!" << "\n"
+            << "Hello World!" << "\n"
+            << "Hello World!" << "\n"
+            << "Hello World!" << "\n"
+            << "Hello World!" << "\n"
+            << "Hello World!" << "\n";
+
+        _font_render->set_text(text.str());
     }
 
     void FontTest::impl_render() {

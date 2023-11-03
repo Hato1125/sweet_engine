@@ -40,18 +40,41 @@ namespace sweet {
     }
 
     void FontRender::update_text() {
+        const auto texts = split_line();
+        const size_t text_length = texts.size();
+        const size_t line_length = _lines.size();
+
+        // もし更新する文字列の行より現在の行の方が多い場合は、その差分消す
+        if(text_length < line_length) {
+            const size_t diff_length = line_length - text_length;
+            for(int i = 0; i < diff_length; ++i)
+                _lines.pop_back();
+        }
+
+        for(int i = 0; i < text_length; ++i) {
+            // iが現在の行より小さければ更新できるかを確認する
+            if(i < line_length) {
+                if(_lines[i]->get_text() != texts[i])
+                    _lines[i].reset(new Font(_renderer, _info, texts[i]));
+            } else {
+                _lines.push_back(std::make_unique<Font>(_renderer, _info, texts[i]));
+            }
+        }
+
+        /*
         _lines.clear();
 
-        std::vector<std::string> lines = split_line();
         for(const auto &line : lines)
-            _lines.push_back({ _renderer, _info, line });
+            _lines.push_back(std::make_unique<Font>(_renderer, _info, line));
+
+        */
 
         calc_font_size();
     }
 
     void FontRender::calc_font_size() {
         for(const auto &line : _lines) {
-            const auto &sprite = line.get_sprite();
+            const auto &sprite = line->get_sprite();
 
             if(_size.width < sprite->get_width())
                 _size.width = sprite->get_width();
@@ -65,13 +88,13 @@ namespace sweet {
         float pos_y = 0.0f;
 
         for(const auto &line : _lines) {
-            auto font_sprite = line.get_sprite();
+            auto font_sprite = line->get_sprite();
 
             switch(alignment) {
                 case FontAlignment::left: {
                     pos_x = 0.0f;
                     break;
-                };
+                }
                 case FontAlignment::center: {
                     Size<uint32_t> size = get_size();
                     pos_x = (size.width - font_sprite->get_width()) / 2.0f;

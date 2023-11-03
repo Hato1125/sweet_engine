@@ -1,8 +1,7 @@
-#include <iostream>
 #include "sprite.h"
 
 namespace sweet {
-    Sprite::Sprite() : _texture(nullptr, SDL_DestroyTexture){
+    Sprite::Sprite() : _texture(nullptr, SDL_DestroyTexture) {
         _renderer = nullptr;
         _byte = 0;
         _width = 0;

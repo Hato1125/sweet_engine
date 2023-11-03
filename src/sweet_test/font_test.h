@@ -2,7 +2,9 @@
 #define SWTEST_FONT_TEST_H_
 
 #include <memory>
+#include <sstream>
 
+#include <keyboard.h>
 #include <font.h>
 #include <font_family.h>
 #include <font_render.h>
@@ -18,6 +20,7 @@ namespace swtest {
 
     protected:
         void impl_init() override;
+        void impl_update() override;
         void impl_render() override;
     };
 }

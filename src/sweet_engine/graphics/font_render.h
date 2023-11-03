@@ -4,6 +4,7 @@
 #include <array>
 #include <vector>
 #include <string>
+#include <memory>
 #include <cstdint>
 
 #include <SDL.h>
@@ -29,7 +30,7 @@ namespace sweet {
         FontInfo _info;
         Size<uint32_t> _size;
         std::string _text;
-        std::vector<Font> _lines;
+        std::vector<std::unique_ptr<Font>> _lines;
 
         std::vector<std::string> split_line();
         void update_text();

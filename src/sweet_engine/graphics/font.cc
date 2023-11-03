@@ -33,6 +33,7 @@ namespace sweet {
             _info.font_color.g,
             _info.font_color.b
         };
+
         SDL_Surface *surface = TTF_RenderUTF8_Blended(font, _text.c_str(), color);
 
         TTF_CloseFont(font);
