@@ -61,14 +61,6 @@ namespace sweet {
             }
         }
 
-        /*
-        _lines.clear();
-
-        for(const auto &line : lines)
-            _lines.push_back(std::make_unique<Font>(_renderer, _info, line));
-
-        */
-
         calc_font_size();
     }
 
