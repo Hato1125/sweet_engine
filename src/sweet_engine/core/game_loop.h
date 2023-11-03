@@ -37,6 +37,8 @@ namespace sweet{
 
         double get_frame_sec() const;
         double get_delta_sec() const;
+        float get_f_frame_sec() const;
+        float get_f_delta_sec() const;
         uint32_t get_framerate() const;
     };
 }

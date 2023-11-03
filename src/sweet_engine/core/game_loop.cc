@@ -11,7 +11,7 @@ namespace sweet {
     }
 
     void GameLoop::begin_calc_frame_sec() {
-        _start_clock = std::chrono::steady_clock::now();
+        _start_clock = std::chrono::high_resolution_clock::now();
     }
 
     void GameLoop::end_limmit_framerate() {
@@ -75,6 +75,14 @@ namespace sweet {
 
     double GameLoop::get_delta_sec() const {
         return _delta_sec;
+    }
+
+    float GameLoop::get_f_frame_sec() const {
+        return static_cast<float>(_frame_sec);
+    }
+
+    float GameLoop::get_f_delta_sec() const {
+        return static_cast<float>(_delta_sec);
     }
 
     uint32_t GameLoop::get_framerate() const {
