@@ -1,1 +1,2 @@
-add_library(sweet_scene SHARED "scene_base.cc" "scene_manager.cc")
+add_library(sweet_scene SHARED)
+add_target_sources(sweet_scene)

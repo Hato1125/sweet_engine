@@ -22,6 +22,13 @@ find_package(sdl2 REQUIRED)
 find_package(sdl2_image REQUIRED)
 find_package(sdl2_ttf REQUIRED)
 
+# Macros
+macro(add_target_sources target_name)
+    file(GLOB sources ${CMAKE_CURRENT_SOURCE_DIR}/*.cc)
+    target_sources(${target_name} PRIVATE ${sources})
+endmacro()
+
+
 # Release build.
 if(CMAKE_BUILD_TYPE STREQUAL "Release")
     set(OUTPUT_DIR ${PROJECT_SOURCE_DIR}/build/release)

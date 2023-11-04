@@ -1,1 +1,2 @@
-add_library(sweet_unit SHARED "color.cc" "point.cc" "rectangle.cc" "size.cc")
+add_library(sweet_unit SHARED)
+add_target_sources(sweet_unit)
