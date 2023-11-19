@@ -98,10 +98,8 @@ namespace {
             std::cout << "| " << key << "\n";
     }
 
-    bool select_debug_scene() {
-        std::string scene_name {};
-        std::cout << "> ";
-        std::cin >> scene_name;
+    bool select_debug_scene(const int argc, const char **argv) {
+        std::string scene_name = argv[1];
 
         if(!sweet::SceneManager::get_scene().contains(scene_name))
             return false;
@@ -112,27 +110,37 @@ namespace {
             << "\x1b[32m"
             << "[o] Name of selected scene: "
             << _debug_scene_name
+            << "\"" << _debug_scene_name << "\""
             << "\x1b[m"
             << "\n";
 
         return true;
     }
 
-    void user_select() {
+    bool user_select(const int argc, const char **argv) {
         bool is_contains_scene_name = false;
 
-        do {
-            std::cout << "Please enter the name of the scene you want to debug." << "\n";
-            is_contains_scene_name = select_debug_scene();
+        if(argc < 1) {
+            std::cout << "No scene is selected.";
 
-            if(!is_contains_scene_name) {
-                std::cout
-                    << "\x1b[31m"
-                    << "[x] That scene is not registered."
-                    << "\x1b[m"
-                    << "\n";
-            }
-        } while(!is_contains_scene_name);
+            return false;
+        }
+
+        is_contains_scene_name = select_debug_scene(argc, argv);
+
+        if(!is_contains_scene_name) {
+            std::cout
+                << "\x1b[31m"
+                << "[x] There is no such scene as "
+                << "\"" << argv[1] << "\""
+                << "."
+                << "\x1b[m"
+                << "\n";
+
+            return false;
+        }
+
+        return true;
     }
 }
 
@@ -142,7 +150,8 @@ int main(const int argc, const char **argv) {
     regist_debug_scene();
     output_title();
     output_scene_list();
-    user_select();
+    if(!user_select(argc, argv))
+        return EXIT_FAILURE;
 
     swtest::Main::k_application->running({
         .on_inited = inited,
@@ -153,4 +162,6 @@ int main(const int argc, const char **argv) {
         .on_finishing = finishing,
         .on_event = event,
     });
+
+    return EXIT_SUCCESS;
 }
