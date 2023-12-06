@@ -1,6 +1,8 @@
-set(SWEET_TEST_NAME sweet_test)
+set(MODULE_NAME SWTest)
 
-add_executable(${SWEET_TEST_NAME} "main.cc" "sprite_test.cc" "font_test.cc")
+add_executable(${MODULE_NAME})
+add_target_sources(${MODULE_NAME})
+
 
 set(
     SWEET_TEST_INCLUDE
@@ -13,13 +15,15 @@ set(
 
 set(
     SWEET_TEST_LIBRARY
-    sweet_core
-    sweet_graphics
-    sweet_input
-    sweet_scene
-    sweet_unit
+    SWCore
+    SWGraphics
+    SWInput
+    SWScene
+    SWUnit
     SDL2::SDL2
+    SDL2_image::SDL2_image
+    SDL2_ttf::SDL2_ttf
 )
 
-target_include_directories(${SWEET_TEST_NAME} PUBLIC ${SWEET_TEST_INCLUDE})
-target_link_libraries(${SWEET_TEST_NAME} PUBLIC ${SWEET_TEST_LIBRARY})
+target_include_directories(${MODULE_NAME} PRIVATE ${SWEET_TEST_INCLUDE})
+target_link_libraries(${MODULE_NAME} PRIVATE ${SWEET_TEST_LIBRARY})

@@ -1,2 +1,4 @@
-add_library(sweet_unit SHARED)
-add_target_sources(sweet_unit)
+set(MODULE_NAME SWUnit)
+
+add_library(${MODULE_NAME} SHARED)
+add_target_sources(${MODULE_NAME})

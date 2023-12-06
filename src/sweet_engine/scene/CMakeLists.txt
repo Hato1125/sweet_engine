@@ -1,2 +1,6 @@
-add_library(sweet_scene SHARED)
-add_target_sources(sweet_scene)
+set(MODULE_NAME SWScene)
+
+add_library(${MODULE_NAME} SHARED)
+add_target_sources(${MODULE_NAME})
+
+

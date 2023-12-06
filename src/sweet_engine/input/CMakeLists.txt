@@ -1,4 +1,6 @@
-add_library(sweet_input SHARED)
-add_target_sources(sweet_input)
+set(MODULE_NAME SWInput)
 
-target_link_libraries(sweet_input PUBLIC SDL2::SDL2)
+add_library(${MODULE_NAME} SHARED)
+add_target_sources(${MODULE_NAME})
+
+target_link_libraries(${MODULE_NAME} PRIVATE SDL2::SDL2)

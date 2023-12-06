@@ -120,8 +120,8 @@ namespace {
     bool user_select(const int argc, const char **argv) {
         bool is_contains_scene_name = false;
 
-        if(argc < 1) {
-            std::cout << "No scene is selected.";
+        if(argc <= 1) {
+            std::cout << "No scene is selected." << std::endl;
 
             return false;
         }

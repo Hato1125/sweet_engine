@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.8)
 
-project(sweet_engine CXX)
+project(sweet_engine VERSION 0.3.2 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 23)
-set(CMAKE_CXX_REQUIRED ON)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 if(WIN32)
@@ -13,23 +13,15 @@ endif()
 set(SWEET_ENGINE_DIR ${PROJECT_SOURCE_DIR}/src/sweet_engine)
 set(SWEET_TEST_DIR ${PROJECT_SOURCE_DIR}/src/sweet_test)
 
-if(WIN32)
-    # TODO いつか消す()
-    set(CMAKE_PREFIX_PATH "E:\\sdks")
-endif()
+find_package(SDL2 REQUIRED)
+find_package(SDL2_image REQUIRED)
+find_package(SDL2_ttf REQUIRED)
 
-find_package(sdl2 REQUIRED)
-find_package(sdl2_image REQUIRED)
-find_package(sdl2_ttf REQUIRED)
-
-# Macros
 macro(add_target_sources target_name)
     file(GLOB sources ${CMAKE_CURRENT_SOURCE_DIR}/*.cc)
     target_sources(${target_name} PRIVATE ${sources})
 endmacro()
 
-
-# Release build.
 if(CMAKE_BUILD_TYPE STREQUAL "Release")
     set(OUTPUT_DIR ${PROJECT_SOURCE_DIR}/build/release)
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${OUTPUT_DIR}/lib)
