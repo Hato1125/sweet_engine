@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="./asset/icon.svg" width="150px">
+<img src="./asset/icon.svg" width="170px">
 
 # SweetEngine
 シンプルなC++2Dゲームエンジン。  

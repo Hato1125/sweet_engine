@@ -3,6 +3,8 @@
 #include "sprite_test.h"
 #include "font_test.h"
 
+#include <window/window.h>
+
 namespace swtest {
     const std::string Main::_window_title = "SweetEngine Test Application";
     const sweet::Point<uint32_t> Main::_window_point = { SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED };

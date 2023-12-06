@@ -31,7 +31,7 @@ if(CMAKE_BUILD_TYPE STREQUAL "Release")
     add_subdirectory(src/sweet_engine)
 
     file(
-        GLOB SWEET_ENGINE_HEADER_FILES
+        GLOB SW_HEADER_FILES
         "${SWEET_ENGINE_DIR}/core/**.h"
         "${SWEET_ENGINE_DIR}/graphics/**.h"
         "${SWEET_ENGINE_DIR}/input/**.h"
@@ -39,7 +39,7 @@ if(CMAKE_BUILD_TYPE STREQUAL "Release")
         "${SWEET_ENGINE_DIR}/unit/**.h"
     )
 
-    foreach(HEADER ${SWEET_ENGINE_HEADER_FILES})
+    foreach(HEADER ${SW_HEADER_FILES})
         configure_file(${HEADER} ${OUTPUT_DIR}/inc/)
     endforeach()
 else()
